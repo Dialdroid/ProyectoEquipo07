@@ -1,4 +1,4 @@
-    package grupo7.com.appg7;
+    package grupo7.com.appg7.Fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import grupo7.com.appg7.R;
 
 
     public class Fragments_Inicio extends Fragment {

@@ -1,19 +1,19 @@
-    package grupo7.com.appg7;
+    package grupo7.com.appg7.Fragments;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import grupo7.com.appg7.R;
 
-    public class Fragments04 extends Fragment {
-        @SuppressLint("ResourceType")
+
+    public class Tab_Historial_Fragments extends Fragment {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             // Inflate the layout for this fragment
-            return inflater.inflate(R.xml.preferencias, container, false);
+            return inflater.inflate(R.layout.fragment_tab_historial, container, false);
         }
     }

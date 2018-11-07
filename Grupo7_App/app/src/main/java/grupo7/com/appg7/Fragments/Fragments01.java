@@ -1,4 +1,4 @@
-    package grupo7.com.appg7;
+    package grupo7.com.appg7.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,9 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import grupo7.com.appg7.R;
 
 
-public class Fragments01 extends Fragment {
+    public class Fragments01 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

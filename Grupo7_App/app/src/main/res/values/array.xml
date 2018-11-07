@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="tiposGraficos">
-        <item>vectorial</item>
-        <item>bitmap</item>
-        <item>3D</item>
+    <string-array name="tiposDeVolumen">
+        <item>fuerte</item>
+        <item>mediano</item>
+        <item>bajo</item>
     </string-array>
-    <string-array name="tiposGraficosValores">
+    <string-array name="tiposDeSonidos">
         <item>0</item>
         <item>1</item>
         <item>2</item>
     </string-array>
-    <string-array name="tiposConexion">
-        <item>Bluetooth</item>
-        <item>WI-FI</item>
-        <item>Internet</item>
-    </string-array>
-    <string-array name="tiposConexionValores">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
+
 </resources>

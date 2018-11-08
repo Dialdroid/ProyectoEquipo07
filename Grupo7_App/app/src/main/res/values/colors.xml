@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="material_green_50">#E8F5E9</color>
-    <color name="material_green_500">#4CAF50</color>
-    <color name="material_green_700">#388E3C</color>
-    <color name="material_green_a200">#69F0AE</color>
-    <color name="material_lime_a700">#AEEA00</color>
-    <color name="material_purple_a700">#AA00FF</color>
+    <color name="colorPrimary">#2874a6</color>
+    <color name="colorPrimaryDark">#99A3A4</color>
+    <color name="colorAccent">#D35400</color>
+    <color name="material_green_50">#85C1E9</color>
+    <color name="material_green_500">#2874A6</color>
+    <color name="material_green_700">#17202A</color>
+    <color name="material_green_a200">#17202A</color>
+    <color name="material_lime_a700">#17202A</color>
+    <color name="material_purple_a700">#229954</color>
 </resources>

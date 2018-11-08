@@ -2,6 +2,7 @@ package grupo7.com.appg7;
 
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -62,8 +63,8 @@ public class MainActivity extends AppCompatActivity
             series.appendData(new DataPoint(x, y), true, 500);
 
         }
-        graph.addSeries(series);*/
-
+        graph.addSeries(series);
+        */
 
 
 

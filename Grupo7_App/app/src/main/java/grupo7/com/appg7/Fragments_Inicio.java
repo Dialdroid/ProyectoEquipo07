@@ -1,6 +1,9 @@
     package grupo7.com.appg7;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
@@ -11,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
     public class Fragments_Inicio extends Fragment {
@@ -18,6 +22,7 @@ import android.view.ViewGroup;
         private AppBarLayout appBar;
         private TabLayout tabs;
         private ViewPager viewPager;
+
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,6 +34,7 @@ import android.view.ViewGroup;
             appBar=(AppBarLayout)contenedor.findViewById(R.id.appbar);
             tabs=new TabLayout(getActivity());
             tabs.setTabTextColors(Color.parseColor("#FFFFFF"), Color.parseColor("#FFFFFF"));
+
             appBar.addView(tabs);
 
             viewPager=(ViewPager)view.findViewById(R.id.pager);

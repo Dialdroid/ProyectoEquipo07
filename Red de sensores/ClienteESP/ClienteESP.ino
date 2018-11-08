@@ -4,6 +4,7 @@
 #include "ConexionUDP.h"
 #include "SensorMagnetico.h"
 #include "SensorMovimiento.h"
+#include "SensorGas2.h"
 #include <TimeLib.h>
 #include <ArduinoJson.h>
 
@@ -15,6 +16,10 @@ SensorMagnetico magn = SensorMagnetico(2);
 
 //SENSOR MOVIMIENTO  //  pin de entrada
 SensorMovimiento movimiento = SensorMovimiento(17);
+
+
+//SENSOR GAS  //  pin de entrada
+SensorGas2 gas = SensorGas2(35);
 
 //CREDENCIALES CONEXIÓN WI-FI // (ssid, password)
 ConexionWiFi wifi = ConexionWiFi("Grupo7", "123456789");
@@ -43,13 +48,13 @@ void loop(){
     String altura = String(distancia.calcularDistancia()) + "cm";
     String movi = String(movimiento.detectarMovimiento());
     String puerta= String(magn.puertaAbierta());
-    
+    String haygas=String(gas.leerGas());
     //Se recopilan todos esos datos en un objeto JSON
     envio["Hora"]=fecha;
     envio["Altura"] = altura;
     envio["Movimiento"] = movi;
     envio["Puerta"]= puerta;
-
+    envio["Gas"]=haygas;
     //Se copia el objeto JSON a un array de carácteres
     envio.printTo(envioTxt);
 

@@ -23,11 +23,13 @@ import grupo7.com.appg7.R;
             // Inflate the layout for this fragment
             View v = inflater.inflate(R.layout.fragment_tab_sensores, container, false);
 
+
+
             Button altura = (Button) v.findViewById(R.id.Altura);
             altura.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String id = "vWGc8L4V3AQ";
+                    String id = "IF1eN0WK3bU";
                         Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + id));
                         Intent webIntent = new Intent(Intent.ACTION_VIEW,
                                 Uri.parse("http://www.youtube.com/watch?v=" + id));
@@ -35,6 +37,41 @@ import grupo7.com.appg7.R;
                             getContext().startActivity(appIntent);
                         } catch (ActivityNotFoundException ex) {
                             getContext().startActivity(webIntent);
+                    }
+                }
+            });
+
+
+            Button gas = (Button) v.findViewById(R.id.Gas);
+            gas.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String id = "PrxSu2Dr5FQ";
+                    Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + id));
+                    Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("http://www.youtube.com/watch?v=" + id));
+                    try {
+
+                        getContext().startActivity(appIntent);
+                    } catch (ActivityNotFoundException ex) {
+                        getContext().startActivity(webIntent);
+                    }
+                }
+            });
+
+            Button movimiento = (Button) v.findViewById(R.id.Movimiento);
+            movimiento.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String id = "JF1yVCdyebA";
+                    Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + id));
+                    Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("http://www.youtube.com/watch?v=" + id));
+                    try {
+
+                        getContext().startActivity(appIntent);
+                    } catch (ActivityNotFoundException ex) {
+                        getContext().startActivity(webIntent);
                     }
                 }
             });

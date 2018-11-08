@@ -7,21 +7,21 @@
     tools:context="Fragments_Inicio">
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/Movimiento"
         android:layout_width="372dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="368dp"
-        android:text="Button"
+        android:layout_height="44dp"
+        android:layout_marginTop="224dp"
+        android:text="Movimiento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/Gas"
         android:layout_width="372dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="316dp"
-        android:text="Button"
+        android:layout_marginTop="168dp"
+        android:text="Gas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +30,7 @@
         android:id="@+id/Altura"
         android:layout_width="372dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="112dp"
         android:onClick="lanzarAltura"
         android:text="Altura"
         app:layout_constraintEnd_toEndOf="parent"

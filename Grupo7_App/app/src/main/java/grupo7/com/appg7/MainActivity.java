@@ -124,11 +124,17 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+
         //noinspection SimplifiableIfStatement
 
 
         if (id == R.id.acercaDe) {
             lanzarAcercaDe(null);
+            return true;
+        }
+
+        if (id == R.id.accion_perfil){
+            lanzarMiPerfil(null);
             return true;
         }
 
@@ -140,6 +146,11 @@ public class MainActivity extends AppCompatActivity
 
     public void lanzarAcercaDe(View view) {
         Intent i = new Intent(this, AcercaDeActivity.class);
+        startActivity(i);
+    }
+
+    public void lanzarMiPerfil(View v){
+        Intent i = new Intent(this, PerfilActivity.class);
         startActivity(i);
     }
 

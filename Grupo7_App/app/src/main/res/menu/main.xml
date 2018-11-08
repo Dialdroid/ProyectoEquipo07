@@ -9,6 +9,6 @@
         android:title="Acerca de..."
         app:showAsAction="ifRoom|withText" />
     <item
-        android:id="@+id/accion_guardar"
+        android:id="@+id/accion_perfil"
         android:title="Mi perfil" />
 </menu>

@@ -59,11 +59,15 @@ void loop(){
     String hora = recibo["Hora"];
     String movi = recibo["Movimiento"];
     String puerta= recibo["Puerta"];
+    String gas= recibo["Gas"];
+    
     limpiarPantalla();
     M5.Lcd.println(hora );
     M5.Lcd.println("Distancia:"+ distancia);
     M5.Lcd.println("Hay movimiento:"+movi);
     M5.Lcd.println("Puerta:"+puerta);
+    M5.Lcd.println("Gas: "+gas);
+    
     delay(2000);
   }
 }

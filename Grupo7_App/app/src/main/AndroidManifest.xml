@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="grupo7.com.appg7">
 
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,5 +31,9 @@
         </activity>
         <activity android:name=".PerfilActivity"></activity>
     </application>
+
+
+
+
 
 </manifest>

@@ -5,8 +5,12 @@
 #include "SensorMagnetico.h"
 #include "SensorMovimiento.h"
 #include "SensorGas2.h"
+#include "SensorPeso.h"
 #include <TimeLib.h>
 #include <ArduinoJson.h>
+#include "HX711.h"
+#include "soc/rtc.h"
+#include "WiFi.h"
 
 //SENSOR DE DISTANCIA  // (echoPin, triggerPin)
 SensorDistancia distancia = SensorDistancia(12, 14);
@@ -17,6 +21,9 @@ SensorMagnetico magn = SensorMagnetico(2);
 //SENSOR MOVIMIENTO  //  pin de entrada
 SensorMovimiento movimiento = SensorMovimiento(17);
 
+//SENSOR PESO  //  (DOUT, CLK)
+
+SensorPeso peso = SensorPeso(4, 5);
 
 //SENSOR GAS  //  pin de entrada
 SensorGas2 gas = SensorGas2(35);
@@ -49,12 +56,16 @@ void loop(){
     String movi = String(movimiento.detectarMovimiento());
     String puerta= String(magn.puertaAbierta());
     String haygas=String(gas.leerGas());
+    String haypeso=String(peso.leerPeso());
+    
     //Se recopilan todos esos datos en un objeto JSON
     envio["Hora"]=fecha;
     envio["Altura"] = altura;
     envio["Movimiento"] = movi;
     envio["Puerta"]= puerta;
     envio["Gas"]=haygas;
+    envio["Peso"]=haypeso;
+    
     //Se copia el objeto JSON a un array de carácteres
     envio.printTo(envioTxt);
 

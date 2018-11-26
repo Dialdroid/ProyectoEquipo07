@@ -20,7 +20,7 @@ public class PerfilActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil);
+        setContentView(R.layout.fragment_fragment_editar_perfil);
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
 
         String fotoAuxiliar = "https://bit.ly/2zwrJ34";

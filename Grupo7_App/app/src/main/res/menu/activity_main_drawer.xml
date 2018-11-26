@@ -18,8 +18,8 @@
             android:title="Galería" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Tutoriales" />
+            android:icon="@drawable/fui_ic_phone_white_24dp"
+            android:title="Llamar al servicio técnico" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"

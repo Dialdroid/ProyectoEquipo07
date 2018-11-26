@@ -126,6 +126,8 @@ public class MainActivity extends AppCompatActivity
 
 
 
+
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -205,23 +207,42 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
 
             fragmentManager.beginTransaction().replace(R.id.contenedor, new Fragments_Inicio()).commit();
-        } else if (id == R.id.nav_camera) {
+        }
+        if (id == R.id.nav_camera) {
 
             fragmentManager.beginTransaction().replace(R.id.contenedor, new Fragments01()).commit();
 
-        } else if (id == R.id.nav_gallery) {
+        }
+        if (id == R.id.nav_gallery) {
 
             fragmentManager.beginTransaction().replace(R.id.contenedor, new Fragments02()).commit();
 
-        } else if (id == R.id.nav_slideshow) {
+        }
 
-            fragmentManager.beginTransaction().replace(R.id.contenedor, new Fragments03()).commit();
+         if(id == R.id.photoUser){
+            fragmentManager.beginTransaction().replace(R.id.contenedor, new FragmentEditarPerfil()).commit();
+        }
 
-        } else if (id == R.id.nav_manage) {
+
+
+
+         if (id == R.id.nav_slideshow) {
+
+
+             String posted_by = "722105575";
+             String uri = "telefono:" + posted_by.trim();
+             Intent intent = new Intent(Intent.ACTION_DIAL);
+             intent.setData(Uri.parse(uri));
+             startActivity(intent);
+
+        }
+        if (id == R.id.nav_manage) {
 
             lanzarPreferencias(null);
 
-        } else if (id == R.id.nav_share) {
+        }
+
+        if (id == R.id.nav_share) {
 
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
@@ -229,8 +250,12 @@ public class MainActivity extends AppCompatActivity
             sendIntent.setType("text/plain");
             startActivity(sendIntent);
 
-        } else if (id == R.id.nav_send) {
-        }else if (id == R.id.nav_cerrar_sesión) {
+        }
+
+        if (id == R.id.nav_send) {
+        }
+
+        if (id == R.id.nav_cerrar_sesión) {
             AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
 
             dialogo1.setTitle("Advertencia");

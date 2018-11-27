@@ -195,6 +195,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+
     @SuppressLint("ResourceType")
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -228,12 +229,8 @@ public class MainActivity extends AppCompatActivity
 
          if (id == R.id.nav_slideshow) {
 
-
-             String posted_by = "722105575";
-             String uri = "telefono:" + posted_by.trim();
-             Intent intent = new Intent(Intent.ACTION_DIAL);
-             intent.setData(Uri.parse(uri));
-             startActivity(intent);
+             startActivity(new Intent(Intent.ACTION_DIAL,
+                     Uri.parse("tel:" + "7221055575")));
 
         }
         if (id == R.id.nav_manage) {

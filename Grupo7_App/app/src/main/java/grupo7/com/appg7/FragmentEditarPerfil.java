@@ -18,29 +18,23 @@ import com.google.android.gms.tasks.Task;
 
 public class FragmentEditarPerfil extends Fragment {
 
+    MainActivity mainActivity;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         final View vista = inflater.inflate(R.layout.fragment_fragment_editar_perfil, container, false);
 
-        Button editar = (Button) vista.findViewById(R.id.button2);
-        editar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), EditarPerfil.class);
-                startActivity(i);
-            }
-        });
 
         // Inflate the layout for this fragment
         return vista;
     }
 
-    public void editarPerfil(View view) {
-
+ /*   public void lanzarEditarPerfil(View view) {
+        Intent i = new Intent(view.getContext(), EditarPerfil.class);
+        startActivity(i);
     }
 
-
-
+*/
 }

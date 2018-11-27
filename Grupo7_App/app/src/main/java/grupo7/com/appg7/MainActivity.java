@@ -328,4 +328,10 @@ public class MainActivity extends AppCompatActivity
 
         }
     }
+
+    public void lanzarEditarPerfil(View view) {
+        Intent i = new Intent(this, EditarPerfil.class);
+        startActivity(i);
+    }
+
 }

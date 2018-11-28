@@ -5,6 +5,9 @@ import android.util.Log;
 import com.google.android.things.pio.PeripheralManager;
 import com.google.android.things.pio.UartDevice;
 
+
+import org.json.*;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -29,27 +32,40 @@ public class ArduinoUart {
     public void escribir(String s) {
         try {
             int escritos = uart.write(s.getBytes(), s.length());
+
             Log.d(TAG, escritos+" bytes escritos en UART");
+
         } catch (IOException e) {
+
             Log.w(TAG, "Error al escribir en UART", e);
         }
     }
 
     public String leer() {
         String s = "";
+
         int len;
         final int maxCount = 8; // Máximo de datos leídos cada vez
+
         byte[] buffer = new byte[maxCount];
+
         try {
             do {
                 len = uart.read(buffer, buffer.length);
                 for (int i=0; i<len; i++) {
                     s += (char)buffer[i];
+
+
                 }
             } while(len>0);
+
+
+
         } catch (IOException e) {
             Log.w(TAG, "Error al leer de UART", e);
         }
+
+
         return s;
     }
 

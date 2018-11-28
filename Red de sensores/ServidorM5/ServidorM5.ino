@@ -48,15 +48,17 @@ void loop(){
     rec=false;
     udp2.enviarDatos("Recibido"); //Confirmación
     udp2.enviarDatos(texto);      //reenvía lo recibido
-    hora=atol(texto);                 //paso de tecto a int
+    hora=atol(texto);                 //paso de texto a int
     
     StaticJsonBuffer<200> jsonBufferRecv; //definición del buffer para almacenar el objero JSON, 200 máximo
     JsonObject& recibo = jsonBufferRecv.parseObject(texto); //paso de texto a formato JSON
+    
     recibo.printTo(Serial);       //envio por el puerto serie el objeto "recibido"                    
       
     Serial.println();             //nueva línea
-    String distancia=recibo["Altura"];  //extraigo el dato "Segundo" del objeto "recibido" y lo almaceno en la variable "segundo" 
-    String hora = recibo["Hora"];
+    
+    String distancia=recibo["Altura"];  
+    String hora = recibo["Hora"];   //extraigo el dato "Segundo" del objeto "recibido" y lo almaceno en la variable "segundo" 
     String movi = recibo["Movimiento"];
     String puerta= recibo["Puerta"];
     String gas= recibo["Gas"];
@@ -67,6 +69,23 @@ void loop(){
     M5.Lcd.println("Hay movimiento:"+movi);
     M5.Lcd.println("Puerta:"+puerta);
     M5.Lcd.println("Gas: "+gas);
+
+
+    //Envío de datos a la Raspberry
+    if(Serial.available() > 0){
+    char command = (char)Serial.read();
+    switch(command){
+    case 'H':
+      Serial.print(hora);
+      //recibo["Hora"].printTo(Serial);
+      break;
+    case 'D':
+      Serial.print("Envio de DISTANCIA: ");
+      recibo["Altura"].printTo(Serial);
+      Serial.println(distancia);
+      break;
+    }
+    }
     
     delay(2000);
   }

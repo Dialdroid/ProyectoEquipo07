@@ -72,20 +72,7 @@ void loop(){
     //Los datos se envían vía UDP en formato texto
     udp.enviarDatos(envioTxt);
 
-    //Envío de datos a la Raspberry
-    if(Serial.available() > 0){
-    char command = (char)Serial.read();
-    switch(command){
-    case 'H':
-      Serial.println("Hola Mundo!");
-      //udp.enviarDatos("Hola Mundo!");
-      break;
-    case 'D':
-      Serial.print("DISTANCIA: ");
-      Serial.println(altura);
-      break;
-    }
-    }
+    
     //Retardo de 1s entre medición y medición
     delay(1000);
 }

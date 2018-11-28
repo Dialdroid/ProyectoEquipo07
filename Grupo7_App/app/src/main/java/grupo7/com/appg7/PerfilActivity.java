@@ -20,16 +20,16 @@ public class PerfilActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_fragment_editar_perfil);
+        //setContentView(R.layout.fragment_fragment_ver_perfil);
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
 
         String fotoAuxiliar = "https://bit.ly/2zwrJ34";
         Uri foto_usuario = usuario.getPhotoUrl();
-        Nombre = (TextView) findViewById(R.id.nombre);
+        //Nombre = (TextView) findViewById(R.id.nombre);
 
         Nombre.setText(usuario.getDisplayName());
 
-        Correo = (TextView) findViewById(R.id.correo);
+        //Correo = (TextView) findViewById(R.id.correo);
 
         if(usuario.getEmail() != null){
         Correo.setText(usuario.getEmail());}

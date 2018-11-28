@@ -2,7 +2,7 @@ package grupo7.com.appg7;
 
 
 import android.annotation.SuppressLint;
-import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -26,11 +27,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -115,12 +115,25 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
+
+
+        final FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.contenedor, new Fragments_Inicio()).commit();
 
         infoUsuario();
 
+        View headerview = navigationView.getHeaderView(0);
+        ImageView fotoPerfil = (ImageView) headerview.findViewById(R.id.photoUser);
+        fotoPerfil.setOnClickListener(new View.OnClickListener() {
+            // Start new list activity
+            public void onClick(View v) {
+                fragmentManager.beginTransaction().replace(R.id.contenedor, new Fragments01()).commit();
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
     }
+
+
 
 
 
@@ -221,7 +234,7 @@ public class MainActivity extends AppCompatActivity
         }
 
          if(id == R.id.photoUser){
-            fragmentManager.beginTransaction().replace(R.id.contenedor, new FragmentEditarPerfil()).commit();
+            fragmentManager.beginTransaction().replace(R.id.contenedor, new Fragment_Ver_Perfil()).commit();
         }
 
 

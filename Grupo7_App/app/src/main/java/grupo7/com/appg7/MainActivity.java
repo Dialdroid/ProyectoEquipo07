@@ -2,7 +2,6 @@ package grupo7.com.appg7;
 
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,7 +13,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +26,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -121,13 +118,14 @@ public class MainActivity extends AppCompatActivity
         fragmentManager.beginTransaction().replace(R.id.contenedor, new Fragments_Inicio()).commit();
 
         infoUsuario();
-
+        //código para acceder a un fragment desde la imagen del navigation Drawable by: Diego :D
         View headerview = navigationView.getHeaderView(0);
         ImageView fotoPerfil = (ImageView) headerview.findViewById(R.id.photoUser);
         fotoPerfil.setOnClickListener(new View.OnClickListener() {
             // Start new list activity
             public void onClick(View v) {
-                fragmentManager.beginTransaction().replace(R.id.contenedor, new Fragments01()).commit();
+                fragmentManager.beginTransaction().replace(R.id.contenedor, new Fragment_Ver_Perfil()).commit();
+                fragmentManager.beginTransaction().replace(R.id.contenedor, new Fragment_Ver_Perfil()).commit();
                 drawer.closeDrawer(GravityCompat.START);
             }
         });
@@ -322,10 +320,10 @@ public class MainActivity extends AppCompatActivity
             NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
             View header = navigationView.inflateHeaderView(R.layout.nav_header_main);
 
-            TextView usuario_nombre = (TextView)header.findViewById(R.id.nameUser);
+            TextView usuario_nombre = (TextView)header.findViewById(R.id.nombre);
             usuario_nombre.setText(nombre_usario);
 
-            TextView usuario_email = (TextView)header.findViewById(R.id.emailUser);
+            TextView usuario_email = (TextView)header.findViewById(R.id.correo);
             usuario_email.setText(email_usuario);
 
             ImageView usuario_foto = (ImageView)header.findViewById(R.id.photoUser);

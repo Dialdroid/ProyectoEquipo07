@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.Chart;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
@@ -27,8 +28,8 @@ import java.util.ArrayList;
 
 public class Tab_Historial_Fragments extends Fragment {
     private BarChart barChart;
-    private int[] pesos = { 74, 50, 65, 80, 76, 65, 80 };
-    private String[] dias = {"L", "M", "X", "J","V", "S", "D"};
+    private int[] pesos = { 90, 91, 93, 92, 92, 92, 92 };
+    private String[] dias = {"L", "M", "M", "J","V", "S", "D"};
     private int[]colors=new int[]{Color.BLACK,Color.RED,Color.BLUE,Color.GREEN,Color.YELLOW,Color.GRAY,Color.MAGENTA};
     FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
     RecyclerView recyclerHistorial;
@@ -48,7 +49,7 @@ public class Tab_Historial_Fragments extends Fragment {
         AdapatadorHistorialPeso adapter = new AdapatadorHistorialPeso(listaHistorialDatosPeso);
         recyclerHistorial.setAdapter(adapter);
 
-        barChart = (BarChart)vista.findViewById(R.id.BarChart);
+         barChart = (BarChart)vista.findViewById(R.id.BarChart);
         createCharts();
 
         return vista;

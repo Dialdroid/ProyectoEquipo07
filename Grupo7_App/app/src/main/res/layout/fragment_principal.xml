@@ -10,7 +10,7 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/peso"
-        android:layout_width="355dp"
+        android:layout_width="336dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="68dp"
@@ -18,9 +18,10 @@
         android:layout_marginBottom="6dp"
         app:layout_constraintBottom_toTopOf="@+id/imc"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView7">
+
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -39,13 +40,19 @@
                 android:inputType="textMultiLine"
                 android:longClickable="true"
                 android:scrollbars="vertical"
-                android:text="Obtén información detallada de cada medida"
+                android:text="Peso"
                 android:textSize="20sp"
                 android:textStyle="italic"
                 android:typeface="serif"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="72dp"
+                android:layout_height="58dp"
+                android:src="@mipmap/imagen_peso" />
 
 
         </android.support.constraint.ConstraintLayout>
@@ -54,7 +61,7 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/imc"
-        android:layout_width="355dp"
+        android:layout_width="334dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
@@ -85,13 +92,22 @@
                 android:inputType="textMultiLine"
                 android:longClickable="true"
                 android:scrollbars="vertical"
-                android:text="Obtén información detallada de cada medida"
+                android:text="IMC"
                 android:textSize="20sp"
                 android:textStyle="italic"
                 android:typeface="serif"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="67dp"
+                android:layout_height="59dp"
+                android:src="@mipmap/imagen_imc"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp" />
 
 
         </android.support.constraint.ConstraintLayout>
@@ -100,7 +116,7 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/altura"
-        android:layout_width="355dp"
+        android:layout_width="334dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
@@ -130,13 +146,21 @@
                 android:inputType="textMultiLine"
                 android:longClickable="true"
                 android:scrollbars="vertical"
-                android:text="Obtén información detallada de cada medida"
+                android:text="Altura"
                 android:textSize="20sp"
                 android:textStyle="italic"
                 android:typeface="serif"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="64dp"
+                android:layout_height="54dp"
+                android:src="@mipmap/imagen_altura"
+                tools:layout_editor_absoluteX="4dp"
+                tools:layout_editor_absoluteY="3dp" />
 
 
         </android.support.constraint.ConstraintLayout>
@@ -154,5 +178,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>

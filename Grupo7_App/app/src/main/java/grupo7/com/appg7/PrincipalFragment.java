@@ -43,6 +43,28 @@ public class PrincipalFragment extends Fragment {
                 transaction.commit();
             }
         });
+        altura.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.contenedor, new AlturaFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+        imc.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.contenedor, new IMCFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
         return vista;
     }
 

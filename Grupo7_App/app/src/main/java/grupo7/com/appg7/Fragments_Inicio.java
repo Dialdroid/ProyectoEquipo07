@@ -62,7 +62,7 @@ import android.widget.Button;
             public Fragment getItem(int position) {
 
                 switch (position){
-                    case 0:return new Tab_Historial_Fragments();
+                    case 0:return new PrincipalFragment();
                     case 1:return new Tab_Sensores_Fragments();
                 }
 

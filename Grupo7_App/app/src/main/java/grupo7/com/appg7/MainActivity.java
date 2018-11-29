@@ -122,12 +122,14 @@ public class MainActivity extends AppCompatActivity
 
         infoUsuario();
 
+
+        // Acceder a Datos de Perfil mediante la imagen del perfil del navigation drawable
         View headerview = navigationView.getHeaderView(0);
         ImageView fotoPerfil = (ImageView) headerview.findViewById(R.id.photoUser);
         fotoPerfil.setOnClickListener(new View.OnClickListener() {
             // Start new list activity
             public void onClick(View v) {
-                fragmentManager.beginTransaction().replace(R.id.contenedor, new Fragments01()).commit();
+                fragmentManager.beginTransaction().replace(R.id.contenedor, new Fragment_Ver_Perfil()).commit();
                 drawer.closeDrawer(GravityCompat.START);
             }
         });

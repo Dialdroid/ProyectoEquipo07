@@ -21,7 +21,8 @@ class ConexionUDP{
         udp.onPacket([=](AsyncUDPPacket packet) {
             int i=200;
             while (i--) {*(texto+i)=*(packet.data()+i);}
-            return true;      //recepcion de un mensaje
+               //recepcion de un mensaje
         });
+         return true;  
       }    
 };

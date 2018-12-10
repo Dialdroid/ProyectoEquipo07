@@ -27,6 +27,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -51,6 +53,8 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
         private Button AcercaDe;
+
+        private static final String TAG = "MainActivity";
 
 
 
@@ -67,7 +71,7 @@ public class MainActivity extends AppCompatActivity
                     public void onEvent(@Nullable DocumentSnapshot snapshot,
                                         @Nullable FirebaseFirestoreException e){
                         if (e != null) {
-                            Log.e("Firebase", "Error al leer", e);
+                            Log.e("Firebase", "Error", e);
                         } else if (snapshot == null || !snapshot.exists()) {
                             Log.e("Firebase", "Error: documento no encontrado ");
                         } else {
@@ -91,11 +95,10 @@ public class MainActivity extends AppCompatActivity
 
                 FirebaseFirestore db = FirebaseFirestore.getInstance(); Map<String, Object> datos = new HashMap<>();
 
-                datos.put("dato_2", 48);
-                datos.put("numbero", 3.14159265);
-                datos.put("fecha", new Date());
-                datos.put("lista", Arrays.asList(1, 2, 3));
-                datos.put("null", null);
+                datos.put("correo", 48);
+                datos.put("iniciosesion", 3.14159265);
+                datos.put("nombre", new Date());
+
 
                 Map<String, Object> datosAnidados = new HashMap<>();
                 datosAnidados.put("a", 5);
@@ -114,6 +117,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
 
 
 
@@ -208,6 +213,124 @@ public class MainActivity extends AppCompatActivity
                 +", gráficos: " + pref.getString("graficos","?");
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
+
+
+
+
+    /*public void actualizarInfoUsuario() {
+
+        final FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
+        //-----------------------
+
+        final String email_usuario = usuario.getEmail();
+        final Uri foto_usuario = usuario.getPhotoUrl();
+
+
+
+
+        final String telefono_usuario = usuario.getPhoneNumber();
+
+
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        final View hView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final DocumentReference userInfo = db.collection("usuarios").document(usuario.getUid());
+
+        if (usuario.getEmail() != null) {
+
+
+            userInfo.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                    @Nullable FirebaseFirestoreException e) {
+                    if (e != null) {
+
+                        Log.w(TAG, "Medidas no disponibles", e);
+                        return;
+                    }
+
+                    if (snapshot != null && snapshot.exists()) {
+
+                        Usuario miusuario = snapshot.toObject(Usuario.class);
+                        TextView nav_user = (TextView) hView.findViewById(R.id.editText);
+                        String nombre_miusuario = miusuario.getNombre();
+
+
+                        nav_user.setText(nombre_miusuario);
+
+                    } else {
+
+                        Log.d(TAG, "Current data: null");
+                    }
+                }
+            });
+
+            TextView nav_email = (TextView) hView.findViewById(R.id.editText2);
+            nav_email.setText(email_usuario);
+        }
+
+        if (foto_usuario != null) {
+
+            ImageView nav_foto = (ImageView) hView.findViewById(R.id.photoUser);
+            Picasso.with(this).load(foto_usuario).into(nav_foto);
+
+        }
+
+        if (usuario.getPhoneNumber() != null) {
+
+            final String correo_null = "Correo no asignado";
+
+
+            userInfo.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                    @Nullable FirebaseFirestoreException e) {
+                    if (e != null) {
+
+                        Log.w(TAG, "Medidas no disponibles", e);
+                        return;
+                    }
+
+                    if (snapshot != null && snapshot.exists()) {
+
+                        Usuario miusuario = snapshot.toObject(Usuario.class);
+                        TextView nav_user = (TextView) hView.findViewById(R.id.editText);
+                        TextView nav_email = (TextView) hView.findViewById(R.id.editText2);
+                        String nombre_miusuario = miusuario.getNombre();
+                        String correo_miusuario = miusuario.getCorreo();
+
+
+
+
+                        if (nombre_miusuario != null) {
+
+                            nav_user.setText(nombre_miusuario);
+
+                        } else {
+
+                            nav_user.setText(telefono_usuario);
+
+                        }
+
+                        if (correo_miusuario != null) {
+
+                            nav_email.setText(correo_miusuario);
+
+                        } else {
+
+                            nav_email.setText(correo_null);
+
+                        }
+
+                    } else {
+
+                        Log.d(TAG, "Current data: null");
+                    }
+                }
+            });
+        }
+
+    }//actualizarInfo()*/
 
 
 

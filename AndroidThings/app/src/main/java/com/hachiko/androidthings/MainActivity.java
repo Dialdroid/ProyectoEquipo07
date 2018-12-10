@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Switch;
-import serial;
-import time;
+//import serial;
+//import time;
 
 import org.json.*;
 

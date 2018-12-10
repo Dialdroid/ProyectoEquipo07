@@ -214,6 +214,11 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 
+    public void lanzarSonoff(View v){
+        Intent i = new Intent(MainActivity.this, SonoffActivity.class);
+        startActivity(i);
+    }
+
 
 
 
@@ -349,7 +354,8 @@ public class MainActivity extends AppCompatActivity
         }
         if (id == R.id.nav_camera) {
 
-            fragmentManager.beginTransaction().replace(R.id.contenedor, new Fragments01()).commit();
+            lanzarSonoff(null);
+           // fragmentManager.beginTransaction().replace(R.id.contenedor, new Fragments01()).commit();
 
         }
         if (id == R.id.nav_gallery) {

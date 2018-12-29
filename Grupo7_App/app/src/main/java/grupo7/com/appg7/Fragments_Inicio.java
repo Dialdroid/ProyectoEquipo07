@@ -5,13 +5,18 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,55 +33,48 @@ import android.widget.Button;
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
 
-            View view=inflater.inflate(R.layout.fragment_inicio, container, false);
+            View view = inflater.inflate(R.layout.fragment_inicio, container, false);
             //agregado menú tabs
-            View contenedor=(View)container.getParent();
-            appBar=(AppBarLayout)contenedor.findViewById(R.id.appbar);
-            tabs=new TabLayout(getActivity());
-            tabs.setTabTextColors(Color.parseColor("#FFFFFF"), Color.parseColor("#FFFFFF"));
+            BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                    view.findViewById(R.id.navigation);
 
-            appBar.addView(tabs);
+            bottomNavigationView.setOnNavigationItemSelectedListener
+                    (new BottomNavigationView.OnNavigationItemSelectedListener() {
+                        @Override
+                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                            Fragment selectedFragment = null;
+                            switch (item.getItemId()) {
+                                case R.id.action_item1:
+                                    selectedFragment = PrincipalFragment.newInstance();
+                                    break;
+                                case R.id.action_item2:
+                                    selectedFragment = Tab_Historial_Fragments.newInstance();
+                                    break;
+                                case R.id.action_item3:
+                                    selectedFragment = Tab_Sensores_Fragments.newInstance();
+                                    break;
 
-            viewPager=(ViewPager)view.findViewById(R.id.pager);
-            ViewPagerAdapter pagerAdapter=new ViewPagerAdapter(getFragmentManager());
-            viewPager.setAdapter(pagerAdapter);
-            tabs.setupWithViewPager(viewPager);
+                            }
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.frame_layout, selectedFragment);
+                            transaction.commit();
+
+                            return true;
+                        }
+
+
+                    });
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_layout, PrincipalFragment.newInstance());
+            bottomNavigationView.getMenu().getItem(2).setChecked(true);
+            transaction.commit();
 
             return view;
         }
 
-        @Override
-        public void onDestroyView(){
-            super.onDestroyView();
-            appBar.removeView(tabs);
+
+
+
         }
 
-        public class ViewPagerAdapter extends FragmentStatePagerAdapter{
-            public ViewPagerAdapter(FragmentManager fragmentManager){
-                super(fragmentManager);
-            }
 
-            String[] titulosTabs={"Historial", "Sensores"};
-
-            @Override
-            public Fragment getItem(int position) {
-
-                switch (position){
-                    case 0:return new PrincipalFragment();
-                    case 1:return new Tab_Sensores_Fragments();
-                }
-
-                return null;
-            }
-
-            @Override
-            public int getCount() {
-                return 2;
-            }
-
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return titulosTabs[position];
-            }
-        }
-    }

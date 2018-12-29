@@ -27,6 +27,18 @@ import java.util.ArrayList;
 
 
 public class Tab_Historial_Fragments extends Fragment {
+
+
+    public static Tab_Historial_Fragments newInstance() {
+        Tab_Historial_Fragments fragment = new Tab_Historial_Fragments();
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     private BarChart barChart;
     private int[] pesos = { 90, 91, 93, 92, 92, 92, 92 };
     private String[] dias = {"L", "M", "M", "J","V", "S", "D"};
@@ -74,20 +86,6 @@ public class Tab_Historial_Fragments extends Fragment {
         return chart;
     }
 
-       /* private void legend ( Chart chart ){
-            Legend legend = chart.getLegend();
-            legend.setForm(Legend.LegendForm.CIRCLE);
-            legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-
-            ArrayList<LegendEntry> entries = new ArrayList<>();
-            for( int i = 0; i < dias.length; i++ ){
-                LegendEntry entry = new LegendEntry();
-                entry.formColor = colors[i];
-                entry.label = dias[i];
-                entries.add(entry);
-            }
-            legend.setCustom(entries);
-        }*/
 
     private ArrayList<BarEntry>getBarEntries(){
         ArrayList<BarEntry> entries = new ArrayList<>();

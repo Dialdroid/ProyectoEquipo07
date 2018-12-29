@@ -17,6 +17,18 @@ import grupo7.com.appg7.R;
 
     public class Tab_Sensores_Fragments extends Fragment {
 
+
+
+        public static Tab_Sensores_Fragments newInstance() {
+            Tab_Sensores_Fragments fragment = new Tab_Sensores_Fragments();
+            return fragment;
+        }
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+        }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {

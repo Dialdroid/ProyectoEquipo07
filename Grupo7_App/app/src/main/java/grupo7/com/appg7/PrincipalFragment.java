@@ -16,9 +16,14 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class PrincipalFragment extends Fragment {
 
+    public static PrincipalFragment newInstance() {
+        PrincipalFragment fragment = new PrincipalFragment();
+        return fragment;
+    }
 
-    public PrincipalFragment() {
-
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
 

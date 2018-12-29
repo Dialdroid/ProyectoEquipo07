@@ -84,11 +84,11 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
 
 
-            @Override
+           @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Escribiendo en la base de datos", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -106,8 +106,8 @@ public class MainActivity extends AppCompatActivity
                 datos.put("objectExample", datosAnidados);
                 db.collection("coleccion").document("documento").set(datos);
 
-            }
-        });
+         }
+        });*/
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void lanzarSonoff(View v){
-        Intent i = new Intent(MainActivity.this, SonoffActivity.class);
+        Intent i = new Intent(this, SonoffActivity.class);
         startActivity(i);
     }
 

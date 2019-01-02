@@ -48,10 +48,10 @@ import android.widget.Button;
                                     selectedFragment = PrincipalFragment.newInstance();
                                     break;
                                 case R.id.action_item2:
-                                    selectedFragment = Tab_Historial_Fragments.newInstance();
+                                    selectedFragment = Tab_Sensores_Fragments.newInstance();
                                     break;
                                 case R.id.action_item3:
-                                    selectedFragment = Tab_Sensores_Fragments.newInstance();
+                                    selectedFragment = Tab_Historial_Fragments.newInstance();
                                     break;
 
                             }

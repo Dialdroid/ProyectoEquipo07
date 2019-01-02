@@ -50,7 +50,7 @@ public class Tab_Historial_Fragments extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View vista = inflater.inflate(R.layout.fragment_tab_historial, container, false);
+        View vista = inflater.inflate(R.layout.fragment_historial, container, false);
 
         listaHistorialDatosPeso = new ArrayList<>();
         recyclerHistorial = (RecyclerView) vista.findViewById(R.id.recyclerId);

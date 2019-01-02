@@ -31,7 +31,7 @@ public class PrincipalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View vista = inflater.inflate(R.layout.fragment_principal, container, false);
+        View vista = inflater.inflate(R.layout.fragment_peso, container, false);
         CardView peso = (CardView) vista.findViewById(R.id.peso);
         CardView imc = (CardView) vista.findViewById(R.id.imc);
         CardView altura = (CardView) vista.findViewById(R.id.altura);

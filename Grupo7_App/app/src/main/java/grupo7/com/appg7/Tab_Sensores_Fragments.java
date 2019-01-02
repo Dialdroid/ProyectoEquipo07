@@ -33,7 +33,7 @@ import grupo7.com.appg7.R;
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             // Inflate the layout for this fragment
-            View v = inflater.inflate(R.layout.fragment_tab_sensores, container, false);
+            View v = inflater.inflate(R.layout.fragment_estadisticas, container, false);
 
 
 

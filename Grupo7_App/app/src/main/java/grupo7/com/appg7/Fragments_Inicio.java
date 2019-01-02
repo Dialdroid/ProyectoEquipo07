@@ -66,7 +66,7 @@ import android.widget.Button;
                     });
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.replace(R.id.frame_layout, PrincipalFragment.newInstance());
-            bottomNavigationView.getMenu().getItem(2).setChecked(true);
+            bottomNavigationView.getMenu().getItem(0).setChecked(true);
             transaction.commit();
 
             return view;

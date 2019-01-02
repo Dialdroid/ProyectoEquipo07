@@ -9,4 +9,6 @@
     <color name="material_green_a200">#17202A</color>
     <color name="material_lime_a700">#17202A</color>
     <color name="material_purple_a700">#229954</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_trans">#99FFFFFF</color>
 </resources>

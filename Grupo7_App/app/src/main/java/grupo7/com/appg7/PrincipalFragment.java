@@ -53,7 +53,7 @@ public class PrincipalFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View vista = inflater.inflate(R.layout.fragment_peso, container, false);
-
+ /*
         {   // // Chart Style // //
             chart = vista.findViewById(R.id.chart1);
 
@@ -144,10 +144,10 @@ public class PrincipalFragment extends Fragment {
         l.setForm(Legend.LegendForm.LINE);
 
 
-
+*/
         return vista;
     }
-
+/*
     private void setData(int count, float range) {
 
         ArrayList<Entry> values = new ArrayList<>();
@@ -218,8 +218,10 @@ public class PrincipalFragment extends Fragment {
             // set data
             chart.setData(data);
         }
-    }
 
+
+    }
+*/
 
 
 

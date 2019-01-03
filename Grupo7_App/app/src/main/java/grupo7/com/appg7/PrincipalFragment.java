@@ -13,6 +13,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -33,9 +34,11 @@ import java.util.ArrayList;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 
+
 public class PrincipalFragment extends Fragment {
 
     private LineChart chart;
+    private TextView tvX, tvY;
 
     public static PrincipalFragment newInstance() {
         PrincipalFragment fragment = new PrincipalFragment();
@@ -53,7 +56,15 @@ public class PrincipalFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View vista = inflater.inflate(R.layout.fragment_peso, container, false);
- /*
+
+
+
+        tvX = vista.findViewById(R.id.tvXMax);
+        tvY = vista.findViewById(R.id.tvYMax);
+
+
+
+
         {   // // Chart Style // //
             chart = vista.findViewById(R.id.chart1);
 
@@ -67,9 +78,8 @@ public class PrincipalFragment extends Fragment {
             chart.setTouchEnabled(true);
 
             // set listeners
-            //chart.setOnChartValueSelectedListener(this);
-            chart.setDrawGridBackground(false);
 
+            chart.setDrawGridBackground(false);
 
             // enable scaling and dragging
             chart.setDragEnabled(true);
@@ -80,6 +90,7 @@ public class PrincipalFragment extends Fragment {
             // force pinch zoom along both axis
             chart.setPinchZoom(true);
         }
+
         XAxis xAxis;
         {   // // X-Axis Style // //
             xAxis = chart.getXAxis();
@@ -117,7 +128,7 @@ public class PrincipalFragment extends Fragment {
             ll1.enableDashedLine(10f, 10f, 0f);
             ll1.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
             ll1.setTextSize(10f);
-            ;
+
 
             LimitLine ll2 = new LimitLine(-30f, "Lower Limit");
             ll2.setLineWidth(4f);
@@ -135,6 +146,12 @@ public class PrincipalFragment extends Fragment {
             yAxis.addLimitLine(ll2);
             //xAxis.addLimitLine(llXAxis);
         }
+
+        // add data
+
+        setData(45, 180);
+
+        // draw points over time
         chart.animateX(1500);
 
         // get the legend (only possible after setting data)
@@ -143,11 +160,8 @@ public class PrincipalFragment extends Fragment {
         // draw legend entries as lines
         l.setForm(Legend.LegendForm.LINE);
 
-
-*/
         return vista;
     }
-/*
     private void setData(int count, float range) {
 
         ArrayList<Entry> values = new ArrayList<>();
@@ -155,7 +169,7 @@ public class PrincipalFragment extends Fragment {
         for (int i = 0; i < count; i++) {
 
             float val = (float) (Math.random() * range) - 30;
-            values.add(new Entry(i, val, getResources().getDrawable(R.drawable.star)));
+            values.add(new Entry(i, val));
         }
 
         LineDataSet set1;
@@ -207,7 +221,14 @@ public class PrincipalFragment extends Fragment {
                 }
             });
 
-
+            // set color of filled area
+            if (Utils.getSDKInt() >= 18) {
+                // drawables only supported on api level 18 and above
+                Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.fade_red);
+                set1.setFillDrawable(drawable);
+            } else {
+                set1.setFillColor(Color.BLACK);
+            }
 
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1); // add the data sets
@@ -218,12 +239,12 @@ public class PrincipalFragment extends Fragment {
             // set data
             chart.setData(data);
         }
-
-
     }
-*/
 
 
 
 
 }
+
+
+

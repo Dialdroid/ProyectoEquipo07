@@ -1,39 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Fragments_Inicio">
+    tools:context="Fragments_Inicio"
+    tools:layout_editor_absoluteY="81dp">
 
-    <Button
-        android:id="@+id/Movimiento"
-        android:layout_width="372dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="224dp"
-        android:text="Movimiento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
+            android:layout_marginBottom="68dp"
+            android:src="@drawable/plano"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/Gas"
-        android:layout_width="372dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="168dp"
-        android:text="Gas"
+    <ImageButton
+        android:id="@+id/dormitorio"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_marginTop="53dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/marker"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/comedor"
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
-    <Button
-        android:id="@+id/Altura"
-        android:layout_width="372dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
-        android:onClick="lanzarAltura"
-        android:text="Altura"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/comedor"
+            android:layout_width="wrap_content"
+            android:layout_height="84dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/marker"
+            app:layout_constraintEnd_toStartOf="@+id/dormitorio"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView3" />
+    </RelativeLayout>

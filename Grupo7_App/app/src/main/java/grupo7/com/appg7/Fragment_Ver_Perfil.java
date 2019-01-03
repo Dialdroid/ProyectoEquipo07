@@ -43,6 +43,7 @@ public class Fragment_Ver_Perfil extends Fragment implements View.OnClickListene
             String nombre_usario = usuario.getDisplayName();
             String email_usuario = usuario.getEmail();
             Uri foto_usuario = usuario.getPhotoUrl();
+            //int telefono = usuario.telephone();
             //String numero_usuario = usuario.getPhoneNumber();
             String fotoAuxiliar = "https://bit.ly/2zwrJ34";
 

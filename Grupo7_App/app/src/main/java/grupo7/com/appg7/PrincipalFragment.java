@@ -1,5 +1,6 @@
 package grupo7.com.appg7;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -13,6 +14,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -160,6 +162,25 @@ public class PrincipalFragment extends Fragment {
         // draw legend entries as lines
         l.setForm(Legend.LegendForm.LINE);
 
+
+
+
+       Button mShowAdd = (Button) vista.findViewById(R.id.add);
+       mShowAdd.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
+               View mView= getLayoutInflater().inflate(R.layout.modal_layout,null);
+
+               mBuilder.setView(mView);
+               AlertDialog dialog = mBuilder.create();
+               dialog.show();
+           }
+       });
+
+
+
+
         return vista;
     }
     private void setData(int count, float range) {
@@ -239,6 +260,12 @@ public class PrincipalFragment extends Fragment {
             // set data
             chart.setData(data);
         }
+    }
+
+
+    private void AnyadirPeso(){
+
+
     }
 
 

@@ -6,16 +6,39 @@
 
     <EditText
         android:id="@+id/edit_peso"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_width="262dp"
+        android:layout_height="65dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
         android:layout_marginStart="24dp"
         android:layout_marginTop="2dp"
-        android:layout_marginEnd="27dp"
         android:hint="Peso"
         android:inputType="number" />
+
+    <Button
+        android:id="@+id/add_peso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_peso"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="82dp"
+        android:text="OK" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="69dp"
+        android:layout_height="51dp"
+        android:layout_alignBottom="@+id/edit_peso"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="12dp"
+        android:layout_toEndOf="@+id/edit_peso"
+        android:text="KG"
+        android:textSize="24sp" />
 
 
 </RelativeLayout>

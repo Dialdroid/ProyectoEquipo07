@@ -15,6 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +44,10 @@ public class PrincipalFragment extends Fragment {
 
     private LineChart chart;
     private TextView tvX, tvY;
+    ArrayList<Entry> values = new ArrayList<>();
+    private int[] pesos = { 90, 91, 93, 92, 92, 92, 92 };
+
+
 
     public static PrincipalFragment newInstance() {
         PrincipalFragment fragment = new PrincipalFragment();
@@ -64,113 +71,45 @@ public class PrincipalFragment extends Fragment {
         tvX = vista.findViewById(R.id.tvXMax);
         tvY = vista.findViewById(R.id.tvYMax);
 
-
-
-
-        {   // // Chart Style // //
+           // // Chart Style // //
             chart = vista.findViewById(R.id.chart1);
-
-            // background color
-            chart.setBackgroundColor(Color.WHITE);
-
-            // disable description text
-            chart.getDescription().setEnabled(false);
-
-            // enable touch gestures
-            chart.setTouchEnabled(true);
-
-            // set listeners
-
-            chart.setDrawGridBackground(false);
-
-            // enable scaling and dragging
-            chart.setDragEnabled(true);
-            chart.setScaleEnabled(true);
-            // chart.setScaleXEnabled(true);
-            // chart.setScaleYEnabled(true);
-
-            // force pinch zoom along both axis
-            chart.setPinchZoom(true);
-        }
-
-        XAxis xAxis;
-        {   // // X-Axis Style // //
-            xAxis = chart.getXAxis();
-
-            // vertical grid lines
-            xAxis.enableGridDashedLine(10f, 10f, 0f);
-        }
-
-        YAxis yAxis;
-        {   // // Y-Axis Style // //
-            yAxis = chart.getAxisLeft();
-
-            // disable dual axis (only use LEFT axis)
-            chart.getAxisRight().setEnabled(false);
-
-            // horizontal grid lines
-            yAxis.enableGridDashedLine(10f, 10f, 0f);
-
-            // axis range
-            yAxis.setAxisMaximum(200f);
-            yAxis.setAxisMinimum(-50f);
-        }
-
-
-        {   // // Create Limit Lines // //
-            LimitLine llXAxis = new LimitLine(9f, "Index 10");
-            llXAxis.setLineWidth(4f);
-            llXAxis.enableDashedLine(10f, 10f, 0f);
-            llXAxis.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
-            llXAxis.setTextSize(10f);
-
-
-            LimitLine ll1 = new LimitLine(150f, "Upper Limit");
-            ll1.setLineWidth(4f);
-            ll1.enableDashedLine(10f, 10f, 0f);
-            ll1.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
-            ll1.setTextSize(10f);
-
-
-            LimitLine ll2 = new LimitLine(-30f, "Lower Limit");
-            ll2.setLineWidth(4f);
-            ll2.enableDashedLine(10f, 10f, 0f);
-            ll2.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
-            ll2.setTextSize(10f);
-
-
-            // draw limit lines behind data instead of on top
-            yAxis.setDrawLimitLinesBehindData(true);
-            xAxis.setDrawLimitLinesBehindData(true);
-
-            // add limit lines
-            yAxis.addLimitLine(ll1);
-            yAxis.addLimitLine(ll2);
-            //xAxis.addLimitLine(llXAxis);
-        }
-
-        // add data
-
-        setData(45, 180);
-
-        // draw points over time
-        chart.animateX(1500);
-
-        // get the legend (only possible after setting data)
-        Legend l = chart.getLegend();
-
-        // draw legend entries as lines
-        l.setForm(Legend.LegendForm.LINE);
+        setChart();
 
 
 
 
-       Button mShowAdd = (Button) vista.findViewById(R.id.add);
+
+       ImageView mShowAdd = (ImageView) vista.findViewById(R.id.add);
        mShowAdd.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
                View mView= getLayoutInflater().inflate(R.layout.modal_layout,null);
+                final EditText newPeso = (EditText) mView.findViewById(R.id.edit_peso);
+                Button AddPeso = (Button) mView.findViewById(R.id.add_peso);
+                AddPeso.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if(!newPeso.getText().toString().isEmpty()){
+                            int numero = Integer.parseInt(newPeso.getText().toString());
+                            if(numero>300){
+                                Toast.makeText(getActivity(), "Probablemente vas a morir ya",
+                                        Toast.LENGTH_LONG).show();
+                            }
+
+
+                            setChart();
+
+
+
+                        }else{
+                            Toast.makeText(getActivity(), "Escribe tu nuevo peso",
+                                    Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                });
 
                mBuilder.setView(mView);
                AlertDialog dialog = mBuilder.create();
@@ -183,14 +122,14 @@ public class PrincipalFragment extends Fragment {
 
         return vista;
     }
-    private void setData(int count, float range) {
+    private void setData(){
 
-        ArrayList<Entry> values = new ArrayList<>();
 
-        for (int i = 0; i < count; i++) {
 
-            float val = (float) (Math.random() * range) - 30;
-            values.add(new Entry(i, val));
+        for (int i = 0; i < pesos.length; i++) {
+
+
+            values.add(new Entry(i, pesos[i]));
         }
 
         LineDataSet set1;
@@ -262,9 +201,107 @@ public class PrincipalFragment extends Fragment {
         }
     }
 
+    private void setChart(){
+            // background color
+            chart.setBackgroundColor(Color.WHITE);
 
-    private void AnyadirPeso(){
+            // disable description text
+            chart.getDescription().setEnabled(false);
 
+            // enable touch gestures
+            chart.setTouchEnabled(true);
+
+            // set listeners
+
+            chart.setDrawGridBackground(false);
+
+            // enable scaling and dragging
+            chart.setDragEnabled(true);
+            chart.setScaleEnabled(true);
+            chart.setScaleXEnabled(true);
+            chart.setScaleYEnabled(true);
+
+            // force pinch zoom along both axis
+            chart.setPinchZoom(true);
+
+
+        XAxis xAxis;
+        {   // // X-Axis Style // //
+            xAxis = chart.getXAxis();
+
+            // vertical grid lines
+            xAxis.enableGridDashedLine(10f, 10f, 0f);
+        }
+
+        YAxis yAxis;
+        {   // // Y-Axis Style // //
+            yAxis = chart.getAxisLeft();
+
+            // disable dual axis (only use LEFT axis)
+            chart.getAxisRight().setEnabled(false);
+
+            // horizontal grid lines
+            yAxis.enableGridDashedLine(10f, 10f, 0f);
+
+            // axis range
+            yAxis.setAxisMaximum(150f);
+            yAxis.setAxisMinimum(-50f);
+        }
+
+
+        {   // // Create Limit Lines // //
+            LimitLine llXAxis = new LimitLine(9f, "Index 10");
+            llXAxis.setLineWidth(4f);
+            llXAxis.enableDashedLine(10f, 10f, 0f);
+            llXAxis.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
+            llXAxis.setTextSize(10f);
+
+
+            LimitLine ll1 = new LimitLine(150f, "Upper Limit");
+            ll1.setLineWidth(4f);
+            ll1.enableDashedLine(10f, 10f, 0f);
+            ll1.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
+            ll1.setTextSize(10f);
+
+
+            LimitLine ll2 = new LimitLine(-30f, "Lower Limit");
+            ll2.setLineWidth(4f);
+            ll2.enableDashedLine(10f, 10f, 0f);
+            ll2.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
+            ll2.setTextSize(10f);
+
+
+            // draw limit lines behind data instead of on top
+            yAxis.setDrawLimitLinesBehindData(true);
+            xAxis.setDrawLimitLinesBehindData(true);
+
+            // add limit lines
+            yAxis.addLimitLine(ll1);
+            yAxis.addLimitLine(ll2);
+            //xAxis.addLimitLine(llXAxis);
+        }
+
+        // add data
+
+        setData();
+
+        // draw points over time
+        chart.animateX(1500);
+
+        // get the legend (only possible after setting data)
+        Legend l = chart.getLegend();
+
+        // draw legend entries as lines
+        l.setForm(Legend.LegendForm.LINE);
+
+    }
+
+
+
+
+    private void AnyadirPeso(int num){
+
+        values.add(new Entry(values.size(),num));
 
     }
 

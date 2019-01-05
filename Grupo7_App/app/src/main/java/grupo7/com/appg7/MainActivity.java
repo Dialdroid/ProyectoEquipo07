@@ -181,10 +181,7 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
 
-        if (id == R.id.accion_perfil){
-            lanzarMiPerfil(null);
-            return true;
-        }
+
 
 
 

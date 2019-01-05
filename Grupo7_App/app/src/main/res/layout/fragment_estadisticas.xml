@@ -7,38 +7,89 @@
     tools:context="Fragments_Inicio"
     tools:layout_editor_absoluteY="81dp">
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="68dp"
-            android:layout_marginBottom="68dp"
-            android:src="@drawable/plano"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginBottom="2dp"
+        android:src="@drawable/plano"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/dormitorio"
-        android:layout_width="wrap_content"
-        android:layout_height="75dp"
-        android:layout_marginTop="53dp"
-        android:layout_marginEnd="16dp"
+        android:id="@+id/comedor"
+        android:layout_width="82dp"
+        android:layout_height="64dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="160dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/marker"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/comedor"
+        app:layout_constraintEnd_toStartOf="@+id/dormitorio"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
-        <ImageButton
-            android:id="@+id/comedor"
-            android:layout_width="wrap_content"
-            android:layout_height="84dp"
-            android:background="@null"
-            android:scaleType="fitCenter"
-            android:src="@drawable/marker"
-            app:layout_constraintEnd_toStartOf="@+id/dormitorio"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView3" />
-    </RelativeLayout>
+    <ImageButton
+        android:id="@+id/dormitorio"
+        android:layout_width="82dp"
+        android:layout_height="64dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="162dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/marker"
+        app:layout_constraintEnd_toStartOf="@+id/dormitorio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+    <ImageButton
+        android:id="@+id/comedor6"
+        android:layout_width="82dp"
+        android:layout_height="64dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="322dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/marker"
+        app:layout_constraintEnd_toStartOf="@+id/dormitorio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+    <ImageButton
+        android:id="@+id/comedor7"
+        android:layout_width="82dp"
+        android:layout_height="64dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="289dp"
+        android:layout_marginTop="344dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/marker"
+        app:layout_constraintEnd_toStartOf="@+id/dormitorio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="221dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="91dp"
+        android:text="Pulse para obtener datos de los sensores de cada habitación"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+</RelativeLayout>

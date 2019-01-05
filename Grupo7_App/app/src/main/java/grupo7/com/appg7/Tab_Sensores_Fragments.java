@@ -53,6 +53,10 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
             });
         }
 
+        //-----------------------------------------------//
+
+
+
         public static Tab_Sensores_Fragments newInstance() {
             Tab_Sensores_Fragments fragment = new Tab_Sensores_Fragments();
             return fragment;
@@ -68,15 +72,6 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
                                  Bundle savedInstanceState) {
             // Inflate the layout for this fragment
             View v = inflater.inflate(R.layout.fragment_estadisticas, container, false);
-
-
-
-
-
-
-
-
-
             ImageButton comedor = (ImageButton) v.findViewById(R.id.comedor);
             comedor.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,6 +79,8 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
                     int stat1 = 18;
                     onButtonShowPopupWindowClick(v, stat1);
                 }
+
+
             });
 
 

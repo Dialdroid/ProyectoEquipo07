@@ -8,7 +8,5 @@
         android:orderInCategory="10"
         android:title="Acerca de..."
         app:showAsAction="ifRoom|withText" />
-    <item
-        android:id="@+id/accion_perfil"
-        android:title="Mi perfil" />
+
 </menu>

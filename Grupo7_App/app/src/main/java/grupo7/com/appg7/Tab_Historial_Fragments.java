@@ -1,5 +1,7 @@
 package grupo7.com.appg7;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +24,10 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import android.graphics.Color;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -39,13 +45,11 @@ public class Tab_Historial_Fragments extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    private BarChart barChart;
-    private int[] pesos = { 90, 91, 93, 92, 92, 92, 92 };
-    private String[] dias = {"L", "M", "M", "J","V", "S", "D"};
-    private int[]colors=new int[]{Color.BLACK,Color.RED,Color.BLUE,Color.GREEN,Color.YELLOW,Color.GRAY,Color.MAGENTA};
+    private AlertDialog dialog;
     FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
     RecyclerView recyclerHistorial;
     ArrayList<HistorialVo> listaHistorialDatosPeso;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,11 +62,69 @@ public class Tab_Historial_Fragments extends Fragment {
 
         llenarLista();
 
-        AdapatadorHistorialPeso adapter = new AdapatadorHistorialPeso(listaHistorialDatosPeso);
+        final AdapatadorHistorialPeso adapter = new AdapatadorHistorialPeso(listaHistorialDatosPeso);
         recyclerHistorial.setAdapter(adapter);
 
-         barChart = (BarChart)vista.findViewById(R.id.BarChart);
-        createCharts();
+        Button buttonRemove = (Button) vista.findViewById(R.id.delete);
+        Button buttonAdd = (Button) vista.findViewById(R.id.add);
+        buttonRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                android.support.v7.app.AlertDialog.Builder dialogo1 = new android.support.v7.app.AlertDialog.Builder(getContext());
+
+                dialogo1.setTitle("Advertencia");
+                dialogo1.setMessage("¿ Quiere borrar el ultimo peso?");
+                dialogo1.setCancelable(false);
+                dialogo1.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        listaHistorialDatosPeso.remove(listaHistorialDatosPeso.size() - 1);
+                        adapter.notifyItemRemoved(listaHistorialDatosPeso.size());
+                    }
+                });
+                dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+
+                    }
+                });
+                dialogo1.show();
+
+            }
+        });
+
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
+                View mView = getLayoutInflater().inflate(R.layout.modal_layout, null);
+                final EditText newPeso = (EditText) mView.findViewById(R.id.edit_peso);
+                Button AddPeso = (Button) mView.findViewById(R.id.add_peso);
+                AddPeso.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if (!newPeso.getText().toString().isEmpty()) {
+                            int numero = Integer.parseInt(newPeso.getText().toString());
+
+                            listaHistorialDatosPeso.add(listaHistorialDatosPeso.size(), new HistorialVo("Peso: " + numero + "kg", "Subtitulo nuevo titular", 1));
+                            adapter.notifyItemInserted(listaHistorialDatosPeso.size());
+                            Toast.makeText(getActivity(), "Peso añadido",
+                                    Toast.LENGTH_LONG).show();
+                            CloseDialog();
+
+                        } else {
+                            Toast.makeText(getActivity(), "Escribe tu nuevo peso",
+                                    Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                });
+
+                mBuilder.setView(mView);
+                dialog = mBuilder.create();
+                dialog.show();
+            }
+        });
 
         return vista;
 
@@ -78,64 +140,7 @@ public class Tab_Historial_Fragments extends Fragment {
         listaHistorialDatosPeso.add(new HistorialVo("Peso: 71kg", "Fecha: 11/19/2018", R.drawable.user_default));
     }
 
-    private Chart getSameChart(Chart chart, String description, int textColor, int animateY ){
-        chart.getDescription().setText(description);
-        chart.getDescription().setTextSize(15);
-        chart.animateY(animateY);
-
-        return chart;
+    private void CloseDialog() {
+        if (dialog != null) dialog.dismiss();
     }
-
-
-    private ArrayList<BarEntry>getBarEntries(){
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        for(int i = 0; i < pesos.length; i++)
-            entries.add(new BarEntry(i, pesos[i]));
-        return entries;
-    }
-
-    private void axisX(XAxis axis){
-        axis.setGranularityEnabled(true);
-        axis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        axis.setTextSize(13);
-        axis.setValueFormatter(new IndexAxisValueFormatter(dias));
-    }
-    private void axisLeft(YAxis axis){
-        axis.setSpaceTop(35);
-        axis.setAxisMinimum(30);
-        axis.setTextSize(13);
-    }
-
-    private void axisRight(YAxis axis){
-        axis.setEnabled(false);
-    }
-
-    public void createCharts(){
-        barChart = (BarChart)getSameChart(barChart, "Pesos", Color.RED, 3000);
-        barChart.setDrawGridBackground(true);
-        barChart.setDrawBarShadow(true);
-        barChart.setData(getBarData());
-        barChart.invalidate();
-
-        axisX(barChart.getXAxis());
-        axisLeft(barChart.getAxisLeft());
-        axisRight(barChart.getAxisRight());
-    }
-
-    private DataSet getData(DataSet dataSet){
-        dataSet.setColors(colors);
-        dataSet.setValueTextColor(Color.WHITE);
-        dataSet.setValueTextSize(12);
-        return dataSet;
-    }
-
-    private BarData getBarData(){
-        BarDataSet barDataSet = (BarDataSet)getData(new BarDataSet(getBarEntries(), ""));
-
-        barDataSet.setBarShadowColor(Color.GRAY);
-        BarData barData = new BarData(barDataSet);
-        barData.setBarWidth(0.65f);
-        return barData;
-    }
-
 }

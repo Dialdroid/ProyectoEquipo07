@@ -10,6 +10,7 @@ public class HistorialVo {
     private String peso;
     private String info;
     private int foto;
+
     //private Uri foto_usuario = usuario.getPhotoUrl();
 
     public HistorialVo(){
@@ -20,6 +21,7 @@ public class HistorialVo {
         this.peso = peso;
         this.info = info;
         this.foto = foto;
+
     }
 
     public String getPeso() {

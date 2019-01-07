@@ -79,12 +79,12 @@ public class PrincipalFragment extends Fragment {
 
 
 
-       ImageView mShowAdd = (ImageView) vista.findViewById(R.id.add);
-       mShowAdd.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
-               View mView= getLayoutInflater().inflate(R.layout.modal_layout,null);
+        ImageView mShowAdd = (ImageView) vista.findViewById(R.id.add);
+               mShowAdd.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
+                       View mView= getLayoutInflater().inflate(R.layout.modal_layout,null);
                 final EditText newPeso = (EditText) mView.findViewById(R.id.edit_peso);
                 Button AddPeso = (Button) mView.findViewById(R.id.add_peso);
                 AddPeso.setOnClickListener(new View.OnClickListener() {

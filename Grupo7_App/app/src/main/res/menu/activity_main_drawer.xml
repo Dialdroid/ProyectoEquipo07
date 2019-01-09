@@ -6,20 +6,16 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@mipmap/food_scale"
             android:title="Inicio" />
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Importar" />
-        <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Galería" />
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Mi casa" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/fui_ic_phone_white_24dp"
-            android:title="Llamar al servicio técnico" />
+            android:id="@+id/nav_camera"
+            android:icon="@mipmap/tools"
+            android:title="Sonoff" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
@@ -29,13 +25,13 @@
     <item android:title="Communicación">
         <menu>
             <item
+                android:id="@+id/nav_slideshow"
+                android:icon="@drawable/fui_ic_phone_white_24dp"
+                android:title="Llamar al servicio técnico" />
+            <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
                 android:title="Compartir" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Enviar" />
         </menu>
     </item>
     <item

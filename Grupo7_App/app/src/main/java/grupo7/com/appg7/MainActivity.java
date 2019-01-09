@@ -390,8 +390,7 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        if (id == R.id.nav_send) {
-        }
+
 
         if (id == R.id.nav_cerrar_sesión) {
             AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);

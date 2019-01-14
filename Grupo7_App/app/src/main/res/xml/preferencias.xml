@@ -4,7 +4,7 @@
     android:key="preferencias_principal" >
     <CheckBoxPreference
         android:key="notificaciones"
-        android:title="Enviar notificaciones"/>
+        android:title="Activar notificaciones"/>
     <ListPreference
         android:key="volumen"
         android:title="Volumen de la App"

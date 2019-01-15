@@ -1,12 +1,16 @@
 package grupo7.com.appg7;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +28,15 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class Fragment_Editar_Perfil extends Fragment {
+
+    private NotificationManager notificationManager;
+    static final String CANAL_ID = "mi_canal";
+    static final int NOTIFICACION_ID = 34;
 
     private static final int PICK_IMAGE = 100;
     //Uri imageUri;
@@ -80,8 +89,8 @@ public class Fragment_Editar_Perfil extends Fragment {
 
 
         Button buttonOK = (Button)vista.findViewById(R.id.buttonOK);
-        buttonOK.setOnClickListener(new View.OnClickListener() {
 
+        buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -116,10 +125,13 @@ public class Fragment_Editar_Perfil extends Fragment {
 
                 userinfo.update(data);
             }
+
+
         });
 
 
         return vista;
+
     }
 
     private void openGallery(){

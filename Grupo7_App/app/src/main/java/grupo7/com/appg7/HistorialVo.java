@@ -7,44 +7,33 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class HistorialVo {
    // FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
-    private String peso;
-    private String info;
-    private int foto;
+    private double peso;
+    private String fecha;
+
 
     //private Uri foto_usuario = usuario.getPhotoUrl();
 
-    public HistorialVo(){
-
-    }
-
-    public HistorialVo(String peso, String info, int foto) {
+    public HistorialVo(double peso, String fecha) {
         this.peso = peso;
-        this.info = info;
-        this.foto = foto;
+        this.fecha = fecha;
 
     }
 
-    public String getPeso() {
+    public double getPeso() {
         return peso;
     }
 
-    public void setPeso(String peso) {
+    public void setPeso(double peso) {
         this.peso = peso;
     }
 
-    public String getInfo() {
-        return info;
+    public String getFecha() {
+        return fecha;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setFecha(String Fecha) {
+        this.fecha = fecha;
     }
 
-    public int getFoto() {
-        return foto;
-    }
 
-    public void setFoto(int foto) {
-        this.foto = foto;
-    }
 }

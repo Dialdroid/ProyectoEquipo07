@@ -174,7 +174,7 @@ public class PrincipalFragment extends Fragment {
                         // Setting Data
                         LineData data = new LineData(dataSet);
                         chart.setData(data);
-                        chart.animateX(2500);
+
                         //refresh
                         chart.invalidate();
 

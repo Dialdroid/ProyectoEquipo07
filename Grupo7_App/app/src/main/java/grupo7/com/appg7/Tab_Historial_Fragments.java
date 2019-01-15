@@ -80,7 +80,6 @@ public class Tab_Historial_Fragments extends Fragment {
 
 
         loadDataFromFirestore();
-        loadLastDataFirestore();
 
         return vista;
 
@@ -93,9 +92,9 @@ public class Tab_Historial_Fragments extends Fragment {
             pesoArrayList.clear();
         }
 
-        final CollectionReference medidasInfo = db.collection("usuarios").document(user.getUid()).collection("bascula");
+        final CollectionReference medidasInfo = db.collection("usuarios").document(user.getUid()).collection("Peso");
 
-        medidasInfo.orderBy("fecha", Query.Direction.DESCENDING)
+        medidasInfo.orderBy("Fecha", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -118,28 +117,6 @@ public class Tab_Historial_Fragments extends Fragment {
                 });
 
     }//
-
-    private void loadLastDataFirestore(){
-        final CollectionReference medidasInfo = db.collection("usuarios").document(user.getUid()).collection("Peso");
-
-        medidasInfo.orderBy("Fecha", Query.Direction.DESCENDING).limit(1)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-
-                            Log.d(TAG, documentSnapshot.getId() + " => " + documentSnapshot.getData());
-
-                            HistorialVo mimedida = new HistorialVo(documentSnapshot.getDouble("Peso"),documentSnapshot.getString("Fecha"));
-                            pesoArrayList.add(mimedida);
-
-
-
-                        }
-                    }
-                });
-    }
 
 }
 

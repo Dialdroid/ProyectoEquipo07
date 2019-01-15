@@ -121,20 +121,53 @@ public class PrincipalFragment extends Fragment {
 
                         LineDataSet dataSet = new LineDataSet(values, "Customized values");
 
-                        YAxis yAxisRight = chart.getAxisRight();
-                        yAxisRight.setEnabled(true);
+                        chart.setBackgroundColor(Color.WHITE);
 
-                        //*
-                        // Controlling left side of y axis
-                        YAxis yAxisLeft = chart.getAxisLeft();
-                        yAxisLeft.setGranularity(1f);
+                        // disable description text
+                        chart.getDescription().setEnabled(false);
 
-                        chart.getAxisLeft().setDrawGridLines(false);
-                        chart.getXAxis().setDrawGridLines(false);
-                        chart.getAxisLeft().setDrawLabels(false);
-                        chart.getAxisRight().setDrawLabels(false);
-                        chart.getXAxis().setDrawLabels(false);
-                        chart.getLegend().setEnabled(false);
+                        // enable touch gestures
+                        chart.setTouchEnabled(true);
+
+                        // set listeners
+
+                        chart.setDrawGridBackground(false);
+
+                        // enable scaling and dragging
+                        chart.setDragEnabled(true);
+                        chart.setScaleEnabled(true);
+                        chart.setScaleXEnabled(true);
+                        chart.setScaleYEnabled(true);
+
+                        // force pinch zoom along both axis
+                        chart.setPinchZoom(true);
+                        XAxis xAxis;
+                        {   // // X-Axis Style // //
+                            xAxis = chart.getXAxis();
+
+                            // vertical grid lines
+                            xAxis.enableGridDashedLine(10f, 10f, 0f);
+                        }
+
+                        YAxis yAxis;
+                        {   // // Y-Axis Style // //
+                            yAxis = chart.getAxisLeft();
+
+                            // disable dual axis (only use LEFT axis)
+                            chart.getAxisRight().setEnabled(false);
+
+                            // horizontal grid lines
+                            yAxis.enableGridDashedLine(10f, 10f, 0f);
+
+                            // axis range
+                            yAxis.setAxisMaximum(150f);
+                            yAxis.setAxisMinimum(-50f);
+                        }
+
+
+                        // add limit lines
+
+
                         Legend l = chart.getLegend();
                         l.setEnabled(false);
 

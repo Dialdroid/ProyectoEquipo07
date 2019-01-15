@@ -3,6 +3,7 @@
 #include "AsyncUDP.h"
 #include "ConexionUDP.h"
 #include <ArduinoJson.h>
+#include <MQTT.h>
 
 //CREDENCIALES CONEXIÓN WI-FI // (ssid, password)
 ConexionWiFi wifi = ConexionWiFi("Grupo7", "123456789");
@@ -19,6 +20,33 @@ void limpiarPantalla(){
   M5.Lcd.setCursor(0,0);
   M5.Lcd.setTextColor(WHITE);
   M5.Lcd.setTextSize(2);
+}
+
+const char broker[] = "iot.eclipse.org";
+WiFiClient net;
+MQTTClient client;
+
+unsigned long lastMillis = 0;
+
+void connect() {
+  Serial.print("checking wifi...");
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(1000);
+  }
+
+  Serial.print("\nconnecting...");
+  while (!client.connect("Test134568789", "try", "try")) {
+    Serial.print(".");
+    delay(1000);
+  }
+  Serial.println("\nconnected!");
+  client.subscribe("grupo7/practica/#");
+ //client.unsubscribe("<usuario>/practica/#");
+}
+
+void messageReceived(String &topic, String &payload) {
+  Serial.println("incoming: " + topic + " - " + payload);
 }
 
 void setup(){
@@ -41,6 +69,10 @@ void setup(){
 
         });
     }
+
+  client.begin("broker.shiftr.io", net);
+  client.onMessage(messageReceived);
+  connect();
 }
 
 void loop(){
@@ -58,7 +90,7 @@ void loop(){
     Serial.println();             //nueva línea
     
     String distancia=recibo["Altura"];  
-    String hora = recibo["Hora"];   //extraigo el dato "Segundo" del objeto "recibido" y lo almaceno en la variable "segundo" 
+    String hora = recibo["Hora"];   
     String movi = recibo["Movimiento"];
     String puerta= recibo["Puerta"];
     String gas= recibo["Gas"];
@@ -69,6 +101,18 @@ void loop(){
     M5.Lcd.println("Hay movimiento:"+movi);
     M5.Lcd.println("Puerta:"+puerta);
     M5.Lcd.println("Gas: "+gas);
+
+    client.loop();
+  delay(10);  // <- fixes some issues with WiFi stability
+
+  if (!client.connected()) {
+    connect();
+  }
+  // publish a message roughly every second.
+  if (millis() - lastMillis > 1000) {
+    lastMillis = millis();
+    client.publish("grupo7/practica/enviarGas/", gas);
+  }
 
 
     //Envío de datos a la Raspberry

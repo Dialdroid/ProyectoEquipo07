@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -52,7 +53,8 @@ public class SonoffActivity extends Activity implements MqttCallback {
             Log.e(TAG, "Error al suscribir.", e);
         }
 
-        Button onOff = (Button) findViewById(R.id.Sonoff);
+        ImageView onOff = (ImageView) findViewById(R.id.Sonoff);
+
         onOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

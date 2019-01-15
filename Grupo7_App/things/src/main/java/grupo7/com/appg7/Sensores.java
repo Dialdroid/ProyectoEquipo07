@@ -70,9 +70,9 @@ public class Sensores {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        CollectionReference dondeGuardo = db.collection("sensores");
+        CollectionReference dondeGuardo = db.collection("sensores/medidaGas");
 
-        db.collection("sensores").document("medidaGas");
+
 
 
         dondeGuardo.add(habitacion).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

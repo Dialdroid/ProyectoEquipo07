@@ -6,11 +6,14 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,19 +36,35 @@ import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Utils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
-
+import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
 
 public class PrincipalFragment extends Fragment {
 
     private LineChart chart;
-    private TextView tvX, tvY;
     ArrayList<Entry> values = new ArrayList<>();
-    private int[] pesos = { 90, 91, 93, 92, 92, 92, 92 };
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    DocumentReference userPeso = db.collection("sensores").document("medidaPeso");
+    ArrayList<HistorialVo> pesoArrayList;
+
 
 
 
@@ -66,244 +85,82 @@ public class PrincipalFragment extends Fragment {
 
         View vista = inflater.inflate(R.layout.fragment_peso, container, false);
 
+        setUpDatos();
 
 
-        tvX = vista.findViewById(R.id.tvXMax);
-        tvY = vista.findViewById(R.id.tvYMax);
+        pesoArrayList = new ArrayList<>();
 
            // // Chart Style // //
             chart = vista.findViewById(R.id.chart1);
-        setChart();
 
-
-
-
-
-        ImageView mShowAdd = (ImageView) vista.findViewById(R.id.add);
-               mShowAdd.setOnClickListener(new View.OnClickListener() {
-                   @Override
-                   public void onClick(View v) {
-                       AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
-                       View mView= getLayoutInflater().inflate(R.layout.modal_layout,null);
-                final EditText newPeso = (EditText) mView.findViewById(R.id.edit_peso);
-                Button AddPeso = (Button) mView.findViewById(R.id.add_peso);
-                AddPeso.setOnClickListener(new View.OnClickListener() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("usuarios")
+                .document(user.getUid())
+                .collection("Peso") // Documento del usuario
+                .orderBy("Fecha", Query.Direction.DESCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
-                    public void onClick(View v) {
-
-                        if(!newPeso.getText().toString().isEmpty()){
-                            int numero = Integer.parseInt(newPeso.getText().toString());
-                            if(numero>300){
-                                Toast.makeText(getActivity(), "Probablemente vas a morir ya",
-                                        Toast.LENGTH_LONG).show();
-                            }
-
-
-                            setChart();
-
-
-
-                        }else{
-                            Toast.makeText(getActivity(), "Escribe tu nuevo peso",
-                                    Toast.LENGTH_LONG).show();
+                    public void onEvent(@Nullable QuerySnapshot value,
+                                        @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Log.w(TAG, "Listen failed.", e);
+                            return;
                         }
 
-                    }
-                });
+                        values = new ArrayList<>();
+                        int i = 0;
+                        for (QueryDocumentSnapshot doc : value) {
+                            if (doc.get("Peso") != null) {
+                                double measure = doc.getDouble("Peso");
+                                values.add(new Entry(i, Float.valueOf(String.valueOf(measure))));
+                                i++;
+                            }
+                        }
+                        //Log.d(TAG, "Current measures: " + measures.toArray()[0].toString());
 
-               mBuilder.setView(mView);
-               AlertDialog dialog = mBuilder.create();
-               dialog.show();
-           }
-       });
+
+                        LineDataSet dataSet = new LineDataSet(values, "Customized values");
+
+                        YAxis yAxisRight = chart.getAxisRight();
+                        yAxisRight.setEnabled(true);
+
+                        //*
+                        // Controlling left side of y axis
+                        YAxis yAxisLeft = chart.getAxisLeft();
+                        yAxisLeft.setGranularity(1f);
+
+                        chart.getAxisLeft().setDrawGridLines(false);
+                        chart.getXAxis().setDrawGridLines(false);
+                        chart.getAxisLeft().setDrawLabels(false);
+                        chart.getAxisRight().setDrawLabels(false);
+                        chart.getXAxis().setDrawLabels(false);
+                        chart.getLegend().setEnabled(false);
+                        Legend l = chart.getLegend();
+                        l.setEnabled(false);
+
+                        // Setting Data
+                        LineData data = new LineData(dataSet);
+                        chart.setData(data);
+                        chart.animateX(2500);
+                        //refresh
+                        chart.invalidate();
+
+                    }});
 
 
 
 
         return vista;
     }
-    private void setData(){
 
 
 
-        for (int i = 0; i < pesos.length; i++) {
+    private void setUpDatos() {
 
-
-            values.add(new Entry(i, pesos[i]));
-        }
-
-        LineDataSet set1;
-
-        if (chart.getData() != null &&
-                chart.getData().getDataSetCount() > 0) {
-            set1 = (LineDataSet) chart.getData().getDataSetByIndex(0);
-            set1.setValues(values);
-            set1.notifyDataSetChanged();
-            chart.getData().notifyDataChanged();
-            chart.notifyDataSetChanged();
-        } else {
-            // create a dataset and give it a type
-            set1 = new LineDataSet(values, "DataSet 1");
-
-            set1.setDrawIcons(false);
-
-            // draw dashed line
-            set1.enableDashedLine(10f, 5f, 0f);
-
-            // black lines and points
-            set1.setColor(Color.BLACK);
-            set1.setCircleColor(Color.BLACK);
-
-            // line thickness and point size
-            set1.setLineWidth(1f);
-            set1.setCircleRadius(3f);
-
-            // draw points as solid circles
-            set1.setDrawCircleHole(false);
-
-            // customize legend entry
-            set1.setFormLineWidth(1f);
-            set1.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
-            set1.setFormSize(15.f);
-
-            // text size of values
-            set1.setValueTextSize(9f);
-
-            // draw selection line as dashed
-            set1.enableDashedHighlightLine(10f, 5f, 0f);
-
-            // set the filled area
-            set1.setDrawFilled(true);
-            set1.setFillFormatter(new IFillFormatter() {
-                @Override
-                public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
-                    return chart.getAxisLeft().getAxisMinimum();
-                }
-            });
-
-            // set color of filled area
-            if (Utils.getSDKInt() >= 18) {
-                // drawables only supported on api level 18 and above
-                Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.fade_red);
-                set1.setFillDrawable(drawable);
-            } else {
-                set1.setFillColor(Color.BLACK);
-            }
-
-            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-            dataSets.add(set1); // add the data sets
-
-            // create a data object with the data sets
-            LineData data = new LineData(dataSets);
-
-            // set data
-            chart.setData(data);
-        }
-    }
-
-    private void setChart(){
-            // background color
-            chart.setBackgroundColor(Color.WHITE);
-
-            // disable description text
-            chart.getDescription().setEnabled(false);
-
-            // enable touch gestures
-            chart.setTouchEnabled(true);
-
-            // set listeners
-
-            chart.setDrawGridBackground(false);
-
-            // enable scaling and dragging
-            chart.setDragEnabled(true);
-            chart.setScaleEnabled(true);
-            chart.setScaleXEnabled(true);
-            chart.setScaleYEnabled(true);
-
-            // force pinch zoom along both axis
-            chart.setPinchZoom(true);
-
-
-        XAxis xAxis;
-        {   // // X-Axis Style // //
-            xAxis = chart.getXAxis();
-
-            // vertical grid lines
-            xAxis.enableGridDashedLine(10f, 10f, 0f);
-        }
-
-        YAxis yAxis;
-        {   // // Y-Axis Style // //
-            yAxis = chart.getAxisLeft();
-
-            // disable dual axis (only use LEFT axis)
-            chart.getAxisRight().setEnabled(false);
-
-            // horizontal grid lines
-            yAxis.enableGridDashedLine(10f, 10f, 0f);
-
-            // axis range
-            yAxis.setAxisMaximum(150f);
-            yAxis.setAxisMinimum(-50f);
-        }
-
-
-        {   // // Create Limit Lines // //
-            LimitLine llXAxis = new LimitLine(9f, "Index 10");
-            llXAxis.setLineWidth(4f);
-            llXAxis.enableDashedLine(10f, 10f, 0f);
-            llXAxis.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
-            llXAxis.setTextSize(10f);
-
-
-            LimitLine ll1 = new LimitLine(150f, "Upper Limit");
-            ll1.setLineWidth(4f);
-            ll1.enableDashedLine(10f, 10f, 0f);
-            ll1.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
-            ll1.setTextSize(10f);
-
-
-            LimitLine ll2 = new LimitLine(-30f, "Lower Limit");
-            ll2.setLineWidth(4f);
-            ll2.enableDashedLine(10f, 10f, 0f);
-            ll2.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
-            ll2.setTextSize(10f);
-
-
-            // draw limit lines behind data instead of on top
-            yAxis.setDrawLimitLinesBehindData(true);
-            xAxis.setDrawLimitLinesBehindData(true);
-
-            // add limit lines
-            yAxis.addLimitLine(ll1);
-            yAxis.addLimitLine(ll2);
-            //xAxis.addLimitLine(llXAxis);
-        }
-
-        // add data
-
-        setData();
-
-        // draw points over time
-        chart.animateX(1500);
-
-        // get the legend (only possible after setting data)
-        Legend l = chart.getLegend();
-
-        // draw legend entries as lines
-        l.setForm(Legend.LegendForm.LINE);
-
+        db = FirebaseFirestore.getInstance();
     }
 
 
-
-
-    private void AnyadirPeso(int num){
-
-        values.add(new Entry(values.size(),num));
-
-    }
 
 
 

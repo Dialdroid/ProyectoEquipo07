@@ -32,7 +32,7 @@ public class AdapatadorHistorialPeso
 
     @Override
     public void onBindViewHolder(@NonNull HistorialHolder historialHolder, int i) {
-        historialHolder.etiPeso.setText(listaHistorial.get(i).getPeso());
+        //historialHolder.etiPeso.setText(listaHistorial.get(i).getPeso());
         //historialHolder.etiInfo.setText(listaHistorial.get(i).getInfo());
         //historialHolder.foto.setImageResource(listaHistorial.get(i).getFoto());
 

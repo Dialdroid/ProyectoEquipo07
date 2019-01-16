@@ -50,8 +50,9 @@ public class Fragment_Editar_Perfil extends Fragment {
         final TextView cambiar_nombre = (TextView) vista.findViewById(R.id.editName);
         final TextView cambiar_correo = (TextView) vista.findViewById(R.id.editEmail);
         final ImageView photo = (ImageView) vista.findViewById(R.id.photoUser);
+        final TextView cambiar_altura = (TextView) vista.findViewById(R.id.editAltura);
 
-        final TextView altura = (TextView) vista.findViewById(R.id.emailUser);
+
 
 
         Uri foto_usuario = usuario.getPhotoUrl();
@@ -85,9 +86,9 @@ public class Fragment_Editar_Perfil extends Fragment {
 
 
 
-
                 String nuevoNombre = cambiar_nombre.getText().toString();
                 String nuevoCorreo = cambiar_correo.getText().toString();
+                String nuevoAltura = cambiar_altura.getText().toString();
 
                 Toast toast1 = Toast.makeText(getApplicationContext(), "Datos modificados correctamente", Toast.LENGTH_SHORT);
                 // entra en el onclick
@@ -108,6 +109,14 @@ public class Fragment_Editar_Perfil extends Fragment {
                     data.put("correo", nuevoCorreo);
 
                 }
+
+                if (!nuevoAltura.equals("")) {
+
+                    data.put("altura", nuevoAltura);
+
+                }
+
+
 
 
 

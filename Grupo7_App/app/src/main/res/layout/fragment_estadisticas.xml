@@ -128,6 +128,40 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
+                        <TextView
+                            android:id="@+id/DescDelgado"
+                            android:layout_width="332dp"
+                            android:layout_height="71dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="Nunca nos arrepentimos de haber comido demasiado poco.-Thomas Jefferson."
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <TextView
+                            android:id="@+id/DescNormal"
+                            android:layout_width="332dp"
+                            android:layout_height="71dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Comer es una necesidad, pero comer de forma inteligente es un arte.-La Rochefoucauld."
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <TextView
+                            android:id="@+id/descSobrepeso"
+                            android:layout_width="332dp"
+                            android:layout_height="71dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="“Nuestros cuerpos son nuestros jardines, nuestras decisiones nuestros jardineros.” -William Shakespeare"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+
                         <ImageView
                             android:id="@+id/delgado"
                             android:layout_width="34dp"
@@ -320,8 +354,7 @@
                             android:layout_height="24dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:text="Media peso último mes"
+                            android:text="Media peso último año"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"

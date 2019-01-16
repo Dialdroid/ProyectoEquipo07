@@ -11,7 +11,7 @@
 
 #include "soc/rtc.h"
 #include "WiFi.h"
-#include <MQTT.h>
+//#include <MQTT.h>
 
 
 //SENSOR DE DISTANCIA  // (echoPin, triggerPin)
@@ -35,31 +35,6 @@ ConexionWiFi wifi = ConexionWiFi("Grupo7", "123456789");
 
 //Conexión UDP  // PUERTO
 ConexionUDP udp = ConexionUDP(1234);
-
-const char broker[] = "iot.eclipse.org";
-
-WiFiClient net;
-MQTTClient client;
-
-void connect() {
- Serial.print("checking wifi...");
- while (WiFi.status() != WL_CONNECTED) {
- Serial.print(".");
- delay(1000);
- }
- Serial.print("\nconnecting...");
- while (!client.connect("Test134568789", "try", "try")) {
- Serial.print(".");
- delay(1000);
- }
- Serial.println("\nconnected!");
- client.subscribe("grupo7/practica/#");
- 
-}
-
-void messageReceived(String &topic, String &payload) {
- Serial.println("incoming: " + topic + " - " + payload);
-}
 
 void setup(){
     Serial.begin(115200);
@@ -109,5 +84,5 @@ void loop(){
     }
     }
     //Retardo de 1s entre medición y medición
-    delay(1000);
+    delay(2000);
 }

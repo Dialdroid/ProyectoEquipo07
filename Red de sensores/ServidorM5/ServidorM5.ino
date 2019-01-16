@@ -5,6 +5,9 @@
 #include <ArduinoJson.h>
 #include <MQTT.h>
 
+const char ssid[] = "Grupo7";
+const char pass[] = "123456789";
+
 //CREDENCIALES CONEXIÓN WI-FI // (ssid, password)
 ConexionWiFi wifi = ConexionWiFi("Grupo7", "123456789");
 
@@ -36,7 +39,7 @@ void connect() {
   }
 
   Serial.print("\nconnecting...");
-  while (!client.connect("Test134568789", "try", "try")) {
+  while (!client.connect("ardu", "try", "try")) {
     Serial.print(".");
     delay(1000);
   }
@@ -51,9 +54,13 @@ void messageReceived(String &topic, String &payload) {
 
 void setup(){
     Serial.begin(115200);
+    WiFi.begin(ssid, pass);
+  client.begin(broker, net);
+  client.onMessage(messageReceived);
+  connect();
     M5.begin();
     M5.Lcd.setTextSize(2);
-    M5.Lcd.print("Conectando...");
+    M5.Lcd.println("Conectando...");
     wifi.conectar();
     M5.Lcd.println("Conectado a la red Wi-Fi");
     rec = udp2.recibirDatos(wifi, texto);
@@ -70,12 +77,12 @@ void setup(){
         });
     }
 
-  client.begin("broker.shiftr.io", net);
-  client.onMessage(messageReceived);
-  connect();
+  
 }
 
 void loop(){
+      client.loop();
+      delay(10);  // <- fixes some issues with WiFi stability
    if (rec){
     rec=false;
     udp2.enviarDatos("Recibido"); //Confirmación
@@ -102,17 +109,12 @@ void loop(){
     M5.Lcd.println("Puerta:"+puerta);
     M5.Lcd.println("Gas: "+gas);
 
-    client.loop();
-  delay(10);  // <- fixes some issues with WiFi stability
-
   if (!client.connected()) {
     connect();
   }
-  // publish a message roughly every second.
-  if (millis() - lastMillis > 1000) {
-    lastMillis = millis();
-    client.publish("grupo7/practica/enviarGas/", gas);
-  }
+  // publish a message 
+  client.publish("grupo7/practica/enviarFecha",hora);
+  client.publish("grupo7/practica/enviarGas",gas);  
 
 
     //Envío de datos a la Raspberry
@@ -131,7 +133,7 @@ void loop(){
     }
     }
     
-    delay(2000);
+    delay(3000);
   }
 }
 

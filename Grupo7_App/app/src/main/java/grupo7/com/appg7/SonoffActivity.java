@@ -32,32 +32,34 @@ public class SonoffActivity extends Activity implements MqttCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sonoff_main);
 
-        try {
-            Log.i(TAG, "Conectando al broker " + broker);
-            client = new MqttClient(broker, clientId, new MemoryPersistence());
-            MqttConnectOptions connOpts = new MqttConnectOptions();
-            connOpts.setCleanSession(true);
-            connOpts.setKeepAliveInterval(60);
-            connOpts.setWill(topicRoot+"WillTopic", "App desconectada".getBytes(),
-                    qos, false);
-            client.connect(connOpts);
-        } catch (MqttException e) {
-            Log.e(TAG, "Error al conectar.", e);
-        }
 
-        try {
-            Log.i(TAG, "Suscrito a " + topicRoot+"POWER");
-            client.subscribe(topicRoot+"POWER", qos);
-            client.setCallback(this);
-        } catch (MqttException e) {
-            Log.e(TAG, "Error al suscribir.", e);
-        }
 
-        ImageView onOff = (ImageView) findViewById(R.id.Sonoff);
+        Button onOff = (Button) findViewById(R.id.onoff);
 
         onOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    Log.i(TAG, "Conectando al broker " + broker);
+                    client = new MqttClient(broker, clientId, new MemoryPersistence());
+                    MqttConnectOptions connOpts = new MqttConnectOptions();
+                    connOpts.setCleanSession(true);
+                    connOpts.setKeepAliveInterval(60);
+                    connOpts.setWill(topicRoot+"WillTopic", "App desconectada".getBytes(),
+                            qos, false);
+                    client.connect(connOpts);
+                } catch (MqttException e) {
+                    Log.e(TAG, "Error al conectar.", e);
+                }
+
+                try {
+                    Log.i(TAG, "Suscrito a " + topicRoot+"POWER");
+                    client.subscribe(topicRoot+"POWER", qos);
+                    client.setCallback(SonoffActivity.this);
+                } catch (MqttException e) {
+                    Log.e(TAG, "Error al suscribir.", e);
+                }
+
                 try {
                     Log.i(TAG, "Publicando mensaje: " + "Toggle");
                     MqttMessage message = new MqttMessage("Toggle".getBytes());
@@ -114,10 +116,8 @@ public class SonoffActivity extends Activity implements MqttCallback {
             message.setQos(qos);
             message.setRetained(false);
             client.publish(Toggle , message);
-
         } catch (MqttException e) {
             Log.e(TAG, "Error al publicar.", e);
         }
-
     }*/
 }

@@ -32,8 +32,9 @@ public class AdapatadorHistorialPeso
 
     @Override
     public void onBindViewHolder(@NonNull HistorialHolder historialHolder, int i) {
-        //historialHolder.etiPeso.setText(listaHistorial.get(i).getPeso());
-        //historialHolder.etiInfo.setText(listaHistorial.get(i).getInfo());
+
+        historialHolder.etiPeso.setText(Double.toString(listaHistorial.get(i).getPeso()));
+        historialHolder.etiInfo.setText(listaHistorial.get(i).getFecha());
         //historialHolder.foto.setImageResource(listaHistorial.get(i).getFoto());
 
     }
@@ -46,13 +47,13 @@ public class AdapatadorHistorialPeso
     public class HistorialHolder extends RecyclerView.ViewHolder {
 
         TextView etiPeso, etiInfo;
-        ImageView foto;
+
 
         public HistorialHolder(@NonNull View itemView) {
             super(itemView);
             etiPeso = (TextView) itemView.findViewById(R.id.idPeso);
             etiInfo = (TextView) itemView.findViewById(R.id.idInfo);
-            foto = (ImageView) itemView.findViewById(R.id.idImagen);
+
         }
     }
 }

@@ -80,12 +80,11 @@
                     int stat1 = 18;
                     onButtonShowPopupWindowClick(v, stat1);
                 }
-
-
-            });
+                });
 
 
             return v;
 
         }
+
     }

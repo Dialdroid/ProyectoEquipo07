@@ -34,10 +34,6 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class Fragment_Editar_Perfil extends Fragment {
 
-    private NotificationManager notificationManager;
-    static final String CANAL_ID = "mi_canal";
-    static final int NOTIFICACION_ID = 34;
-
     private static final int PICK_IMAGE = 100;
     //Uri imageUri;
 

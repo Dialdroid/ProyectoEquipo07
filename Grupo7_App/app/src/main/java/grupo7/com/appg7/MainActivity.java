@@ -216,6 +216,17 @@ public class MainActivity extends AppCompatActivity
         startActivity(i);
     }
 
+    public void startNewActivity(Context context, String packageName) {
+        Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+        if (intent == null) {
+            // Bring user to the market or let them choose an app?
+            intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("market://details?id=" + packageName));
+        }
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
 
 
 
@@ -387,6 +398,14 @@ public class MainActivity extends AppCompatActivity
             sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
             sendIntent.setType("text/plain");
             startActivity(sendIntent);
+
+        }
+
+        if (id == R.id.chat) {
+
+            startNewActivity(this,"com.example.h4chiko.chataplication");
+
+
 
         }
 

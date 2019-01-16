@@ -50,6 +50,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
@@ -64,8 +65,10 @@ public class PrincipalFragment extends Fragment {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     DocumentReference userPeso = db.collection("sensores").document("medidaPeso");
     ArrayList<HistorialVo> pesoArrayList;
-
-
+    ArrayList<Double> listMax;
+    ArrayList<Double> listMin;
+    TextView maximo;
+    TextView minimo;
 
 
     public static PrincipalFragment newInstance() {
@@ -87,6 +90,8 @@ public class PrincipalFragment extends Fragment {
 
         setUpDatos();
 
+        maximo =(TextView) vista.findViewById(R.id.max);
+        minimo=(TextView) vista.findViewById(R.id.min);
 
         pesoArrayList = new ArrayList<>();
 
@@ -180,6 +185,8 @@ public class PrincipalFragment extends Fragment {
 
                     }});
 
+            loadDataFromFirestore();
+
 
 
 
@@ -191,6 +198,99 @@ public class PrincipalFragment extends Fragment {
     private void setUpDatos() {
 
         db = FirebaseFirestore.getInstance();
+    }
+
+
+
+    public double findMax(List<Double> list){
+        double max=list.get(0);
+
+        for (int i=0;i<list.size();i++){
+            if(max<list.get(i)){
+                max=list.get(i);
+            }
+
+        }
+
+
+        return max;
+    }
+
+    public double findMin(List<Double> list){
+        double min=list.get(0);
+
+        for (int i=0;i<list.size();i++){
+            if(min>list.get(i)){
+                min=list.get(i);
+            }
+
+        }
+
+
+        return min;
+    }
+
+
+    private void loadDataFromFirestore() {
+
+
+        final CollectionReference medidasInfo = db.collection("usuarios").document(user.getUid()).collection("Peso");
+
+        medidasInfo.orderBy("Fecha", Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        listMax =new ArrayList<>();
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+
+                            Log.d(TAG, documentSnapshot.getId() + " => " + documentSnapshot.getData());
+
+                            double PesoMax=documentSnapshot.getDouble("Peso");
+                            listMax.add(PesoMax);
+
+                        }
+
+
+
+                        double max=findMax(listMax);
+
+                        maximo.setText(Double.toString(max));
+
+                    }
+                });
+
+
+        final CollectionReference medidasInfoMin = db.collection("usuarios").document(user.getUid()).collection("Peso");
+
+        medidasInfoMin.orderBy("Fecha", Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        listMin =new ArrayList<>();
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+
+                            Log.d(TAG, documentSnapshot.getId() + " => " + documentSnapshot.getData());
+
+                            double PesoMin=documentSnapshot.getDouble("Peso");
+                            listMin.add(PesoMin);
+
+                        }
+
+
+
+                        double min=findMin(listMin);
+
+                        minimo.setText(Double.toString(min));
+
+                    }
+                });
+
+
+
+
+
     }
 
 

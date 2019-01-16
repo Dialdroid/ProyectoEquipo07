@@ -1,16 +1,10 @@
 package grupo7.com.appg7;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +22,6 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.content.Context.NOTIFICATION_SERVICE;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 
@@ -57,6 +50,8 @@ public class Fragment_Editar_Perfil extends Fragment {
         final TextView cambiar_nombre = (TextView) vista.findViewById(R.id.editName);
         final TextView cambiar_correo = (TextView) vista.findViewById(R.id.editEmail);
         final ImageView photo = (ImageView) vista.findViewById(R.id.photoUser);
+
+        final TextView altura = (TextView) vista.findViewById(R.id.emailUser);
 
 
         Uri foto_usuario = usuario.getPhotoUrl();

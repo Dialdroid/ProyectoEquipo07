@@ -1,6 +1,5 @@
 package grupo7.com.appg7;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,9 +14,6 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
-import org.w3c.dom.Text;
 
 
 public class Fragment_Ver_Perfil extends Fragment implements View.OnClickListener {

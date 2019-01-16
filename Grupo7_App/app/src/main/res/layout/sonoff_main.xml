@@ -62,11 +62,14 @@
         android:layout_width="368dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/msg">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,24 +78,32 @@
 
             <TextView
                 android:id="@+id/textView27"
-                android:layout_width="wrap_content"
+                android:layout_width="215dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Gas"
-                android:textSize="50dp"
+                android:text="Gas:"
+                android:textSize="36sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dato_gas"
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="sd" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView7"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
+        android:layout_width="367dp"
+        android:layout_height="51dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView6">
 
@@ -103,12 +114,18 @@
 
             <TextView
                 android:id="@+id/textView28"
-                android:layout_width="wrap_content"
+                android:layout_width="244dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Temperatura"
-                android:textSize="50dp"
+                android:text="Temperatura:"
+                android:textSize="36sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dato_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -117,9 +134,10 @@
         android:layout_width="368dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView7">
 
@@ -130,12 +148,18 @@
 
             <TextView
                 android:id="@+id/textView29"
-                android:layout_width="wrap_content"
+                android:layout_width="249dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Movimiento"
-                android:textSize="50dp"
+                android:text="Movimiento:"
+                android:textSize="36sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dato_movi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -145,7 +169,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="ON"
         android:textSize="50dp"
@@ -154,6 +178,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
         app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="368dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/msg">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/enc_serv"
+            android:layout_width="193dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="arrancar" />
+
+        <Button
+            android:id="@+id/ap_serv"
+            android:layout_width="197dp"
+            android:layout_height="47dp"
+            android:layout_weight="1"
+            android:text="Detener" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>
 
 
 </android.support.constraint.ConstraintLayout>

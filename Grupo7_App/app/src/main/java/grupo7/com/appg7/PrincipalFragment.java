@@ -186,10 +186,6 @@ public class PrincipalFragment extends Fragment {
                     }});
 
             loadDataFromFirestore();
-
-
-
-
         return vista;
     }
 

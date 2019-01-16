@@ -33,6 +33,7 @@
         </activity>
         <activity android:name=".PerfilActivity" />
         <activity android:name=".SonoffActivity" />
+        <service android:name=".ServicioMedidas" />
     </application>
 
 </manifest>

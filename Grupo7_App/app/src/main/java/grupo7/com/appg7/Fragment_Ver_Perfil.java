@@ -37,15 +37,11 @@ public class Fragment_Ver_Perfil extends Fragment implements View.OnClickListene
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    ArrayList<Altura> alturaArrayList;
     TextView alturaUser;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
-
 
         View v = inflater.inflate(R.layout.fragment_fragment__ver__perfil, container, false);
 

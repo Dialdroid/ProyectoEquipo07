@@ -2,6 +2,7 @@ package grupo7.com.appg7;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 
 import com.google.android.gms.nearby.connection.ConnectionsClient;
@@ -92,9 +93,18 @@ public class MainActivity extends Activity implements MqttCallback {
             Log.w(TAG, "Error en sleep()", e);
         }
 
-        final String s = uart.leer();
+        Handler handler = new Handler();
+        Runnable r = new Runnable() {
+            public void run() {
+                final String s = uart.leer();
+                Log.d(TAG, "Recibido de Arduino: " + s);
+            }
+        };
+        handler.postDelayed(r, 1000);
+
+
         
-        Log.d(TAG, "Recibido de Arduino: " + s);
+
 
 
 

@@ -146,13 +146,13 @@ public class Fragment_Ver_Perfil extends Fragment implements View.OnClickListene
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull com.google.android.gms.tasks.Task<QuerySnapshot> task) {
+
                         for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
 
                             Log.d(TAG, documentSnapshot.getId() + " => " + documentSnapshot.getData());
 
-                            Altura mimedida = new Altura(documentSnapshot.getDouble("Altura"));
-                            alturaArrayList.add(mimedida);
-                            String altura = Double.toString(mimedida.getAltura());
+                            Double mimedida = documentSnapshot.getDouble("Altura");
+                            String altura = Double.toString(mimedida);
                             Log.d("alt", altura);
                             alturaUser.setText(altura);
 

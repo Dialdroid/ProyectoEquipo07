@@ -152,14 +152,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
+                        <ImageView
+                            android:id="@+id/imageView15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="66dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:srcCompat="@drawable/linea" />
+
                         <TextView
                             android:id="@+id/DescDelgado"
                             android:layout_width="332dp"
                             android:layout_height="71dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:text="Nunca nos arrepentimos de haber comido demasiado poco.-Thomas Jefferson."
+                            android:layout_marginBottom="16dp"
+                            android:text="Usted esta muy delgado, debería comer más y ir al médico"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" />
@@ -170,7 +179,8 @@
                             android:layout_height="71dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:text="Comer es una necesidad, pero comer de forma inteligente es un arte.-La Rochefoucauld."
+                            android:layout_marginBottom="16dp"
+                            android:text="Usted esta en forma, intente seguir una dieta equilibrada y siga haciendo deporte"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" />
@@ -181,7 +191,8 @@
                             android:layout_height="71dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:text="“Nuestros cuerpos son nuestros jardines, nuestras decisiones nuestros jardineros.” -William Shakespeare"
+                            android:layout_marginBottom="16dp"
+                            android:text="Usted tiene sobrepeso, tiene que ir al médico cuanto antes"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" />

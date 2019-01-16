@@ -50,7 +50,7 @@ public class Fragment_Editar_Perfil extends Fragment {
         final TextView cambiar_nombre = (TextView) vista.findViewById(R.id.editName);
         final TextView cambiar_correo = (TextView) vista.findViewById(R.id.editEmail);
         final ImageView photo = (ImageView) vista.findViewById(R.id.photoUser);
-        final TextView cambiar_altura = (TextView) vista.findViewById(R.id.alturaUser);
+        final TextView cambiar_altura = (TextView) vista.findViewById(R.id.editAltura);
 
 
 
@@ -83,7 +83,6 @@ public class Fragment_Editar_Perfil extends Fragment {
         buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
 
 

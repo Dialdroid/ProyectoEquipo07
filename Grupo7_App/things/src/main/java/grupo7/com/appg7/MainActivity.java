@@ -6,6 +6,11 @@ import android.util.Log;
 
 import com.google.android.gms.nearby.connection.ConnectionsClient;
 import com.google.android.things.pio.PeripheralManager;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -19,7 +24,9 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import static com.example.comun.Mqtt.TAG;
 import static com.example.comun.Mqtt.broker;
@@ -34,14 +41,25 @@ public class MainActivity extends Activity implements MqttCallback {
     private String usuarioActual;
     private Sensores sensores;
     private boolean resmagnetico;
-    //private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    FirebaseFirestore db= FirebaseFirestore.getInstance();
+    FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+    //DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+
+
     private MqttClient Mqttclient;
-    private String enviarGas = "grupo7/practica/enviarGas/";
+    //private String enviarGas = "grupo7/practica/enviarGas/";
+
+    public String fecha;
+    public String gas;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //FirebaseApp.initializeApp(getBaseContext());
+
+
         Log.i(TAG, "Starting Android Things app...");
         //conectarse al broker   iot.eclipse.org
         try {
@@ -115,21 +133,34 @@ public class MainActivity extends Activity implements MqttCallback {
             throws Exception {
         final String payload = new String(message.getPayload());
 
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
+
+
+                //FirebaseFirestore db = FirebaseFirestore.getInstance();
                 //Log.i(TAG, "Recibiendo: " + topic + "->" + payload);
                 if (topic.equals("grupo7/practica/enviarGas")){
                     Log.i(TAG, "Recibido del topic grupo7/practica/enviarGas: "+ payload);
-                    /*int gas = Integer.parseInt(payload);
-                    if(gas>= 6000){
-                        Log.i(TAG, "El gas es mayor que 6000: "+ payload);
-                    }*/
+                    gas  = payload;
 
                 }
+
                 if (topic.equals("grupo7/practica/enviarFecha")){
                     Log.i(TAG, "Recibido del topic grupo7/practica/enviarGas: "+ payload);
+                    fecha = payload;
                 }
+
+                //FirebaseFirestore.getInstance();
+
+
+                Map<String, String> datos = new HashMap<>();
+                datos.put("fecha",fecha );
+                datos.put("gas", gas);
+                db.collection("usuarios").document("8MbTSmqKfrSjEky1PDJNwDK873p1").collection("Gas").add(datos);
+
             }
         });
     }

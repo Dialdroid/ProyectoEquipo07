@@ -43,7 +43,7 @@ public class MainActivity extends Activity implements MqttCallback {
     private boolean resmagnetico;
 
     FirebaseFirestore db= FirebaseFirestore.getInstance();
-    FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+    //FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
     //DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
 
@@ -52,6 +52,7 @@ public class MainActivity extends Activity implements MqttCallback {
 
     public String fecha;
     public String gas;
+    public String movimiento;
 
 
     @Override
@@ -152,6 +153,10 @@ public class MainActivity extends Activity implements MqttCallback {
                     Log.i(TAG, "Recibido del topic grupo7/practica/enviarGas: "+ payload);
                     fecha = payload;
                 }
+                if (topic.equals("grupo7/practica/enviarMovimiento")){
+                    Log.i(TAG, "Recibido del topic grupo7/practica/enviarMovimiento: "+ payload);
+                    movimiento = payload;
+                }
 
                 //FirebaseFirestore.getInstance();
 
@@ -159,7 +164,12 @@ public class MainActivity extends Activity implements MqttCallback {
                 Map<String, String> datos = new HashMap<>();
                 datos.put("fecha",fecha );
                 datos.put("gas", gas);
-                db.collection("usuarios").document("8MbTSmqKfrSjEky1PDJNwDK873p1").collection("Gas").add(datos);
+                db.collection("usuarios").document("E7lFmxiGkJWuPKr1GkvEuhdAAZg2").collection("Gas").add(datos);
+
+                Map<String, String> datos1 = new HashMap<>();
+                datos.put("fecha",fecha );
+                datos.put("movimiento", movimiento);
+                db.collection("usuarios").document("E7lFmxiGkJWuPKr1GkvEuhdAAZg2").collection("Gas").add(datos1);
 
             }
         });

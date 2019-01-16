@@ -101,6 +101,7 @@ void loop(){
     String movi = recibo["Movimiento"];
     String puerta= recibo["Puerta"];
     String gas= recibo["Gas"];
+    String peso= recibo["Peso"];
     
     limpiarPantalla();
     M5.Lcd.println(hora );
@@ -108,13 +109,17 @@ void loop(){
     M5.Lcd.println("Hay movimiento:"+movi);
     M5.Lcd.println("Puerta:"+puerta);
     M5.Lcd.println("Gas: "+gas);
+    M5.Lcd.println("Peso: "+peso);
 
   if (!client.connected()) {
     connect();
   }
   // publish a message 
   client.publish("grupo7/practica/enviarFecha",hora);
-  client.publish("grupo7/practica/enviarGas",gas);  
+  client.publish("grupo7/practica/enviarGas",gas); 
+  client.publish("grupo7/practica/enviarMovimiento",movi);  
+  client.publish("grupo7/practica/enviarPeso",peso);  
+  
 
 
     //Envío de datos a la Raspberry

@@ -5,27 +5,31 @@
 #include "SensorMovimiento.h"
 #include "SensorGas2.h"
 #include "ConexionUDP.h"
+//#include "SensorPeso.h"
+#include "HX711.h"
+#define DOUT  2
+#define CLK  5
 
 #include <TimeLib.h>
 #include <ArduinoJson.h>
 
 #include "soc/rtc.h"
 #include "WiFi.h"
-//#include <MQTT.h>
+
 
 
 //SENSOR DE DISTANCIA  // (echoPin, triggerPin)
 SensorDistancia distancia = SensorDistancia(12, 14);
 
 //SENSOR MAGNÉTICO  //  pin de entrada
-SensorMagnetico magn = SensorMagnetico(2);
+//SensorMagnetico magn = SensorMagnetico(2);
 
 //SENSOR MOVIMIENTO  //  pin de entrada
 SensorMovimiento movimiento = SensorMovimiento(17);
 
-//SENSOR PESO  //  (DOUT, CLK)
-
-//SensorPeso peso = SensorPeso(4, 5);
+//SENSOR PESO  //  (CLK, DOUT)
+HX711 balanza(DOUT, CLK);
+//SensorPeso peso = SensorPeso(5, 2);
 
 //SENSOR GAS  //  pin de entrada
 SensorGas2 gas = SensorGas2(35);
@@ -37,7 +41,12 @@ ConexionWiFi wifi = ConexionWiFi("Grupo7", "123456789");
 ConexionUDP udp = ConexionUDP(1234);
 
 void setup(){
+    
+    
     Serial.begin(115200);
+    rtc_clk_cpu_freq_set(RTC_CPU_FREQ_80M); 
+    balanza.set_scale(24825); // Establecemos la escala
+    balanza.tare(20);  //El peso actual es considerado Tara.
     setTime (17, 45, 0, 22, 10, 2018); //hora minuto segundo dia mes año
     wifi.conectar();
     udp.escuchar(wifi);
@@ -56,12 +65,15 @@ void loop(){
     String fecha = String(day()) + "/" + String(month()) + "/" + String(year()) + "  " + String( hour()) + ":" + String(minute()) + ":" + String(second()); 
     String altura = String(distancia.calcularDistancia()) + "cm";
     String gas2= String(gas.leerGas());
+    String peso2= String(balanza.get_units(20),3);
+    Serial.println("El Peso es de: " + peso2);
 
     //Se recopilan todos esos datos en un objeto JSON
     envio["Hora"]=fecha;
     envio["Altura"] = altura;
     envio["Movimiento"] = movimiento.detectarMovimiento();
     envio["Gas"]=gas2;
+    envio["Peso"]=peso2;
 
     //Se copia el objeto JSON a un array de carácteres
     envio.printTo(envioTxt);

@@ -56,8 +56,6 @@ public class Fragment_Editar_Perfil extends Fragment {
 
         final TextView cambiar_nombre = (TextView) vista.findViewById(R.id.editName);
         final TextView cambiar_correo = (TextView) vista.findViewById(R.id.editEmail);
-
-
         final ImageView photo = (ImageView) vista.findViewById(R.id.photoUser);
 
 

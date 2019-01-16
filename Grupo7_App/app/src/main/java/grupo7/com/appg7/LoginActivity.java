@@ -66,12 +66,12 @@
                  finish();
              } else {
                  // Sign in failed
-                 if (response == null) {
+                 if(response == null) {
                      // User pressed back button
                      Toast.makeText(this, "Cancelado", Toast.LENGTH_LONG).show();
                      return;
                  }
-                 if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
+                 if(response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
                      Toast.makeText(this, "Sin conexión a Internet",
                              Toast.LENGTH_LONG).show();
                      return;

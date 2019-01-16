@@ -51,6 +51,9 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
         ImageView sobrepeso;
         ImageView normal;
         ImageView delgado;
+        TextView desc_d;
+        TextView desc_n;
+        TextView desc_s;
         ArrayList<Double> values = new ArrayList<>();
         int i=0;
         public static Tab_Sensores_Fragments newInstance() {
@@ -77,11 +80,16 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
              normal = (ImageView) v.findViewById(R.id.normal);
              delgado = (ImageView) v.findViewById(R.id.delgado);
              sobrepeso = (ImageView) v.findViewById(R.id.sobrepeso);
+             desc_s = v.findViewById(R.id.descSobrepeso);
+            desc_d = v.findViewById(R.id.DescDelgado);
+            desc_n = v.findViewById(R.id.DescNormal);
 
             normal.setVisibility(v.GONE);
             delgado.setVisibility(v.GONE);
             sobrepeso.setVisibility(v.GONE);
-
+            desc_d.setVisibility(v.GONE);
+            desc_n.setVisibility(v.GONE);
+            desc_s.setVisibility(v.GONE);
 
 
 
@@ -106,12 +114,15 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
                                     double imc = peso*(1.88*1.88);
                                     if(imc<=18.5){
                                         delgado.setVisibility(View.VISIBLE);
+                                        desc_d.setVisibility(View.VISIBLE);
                                     }
                                     if(imc>18.5 && imc<24.9){
                                         normal.setVisibility(View.VISIBLE);
+                                        desc_n.setVisibility(View.VISIBLE);
                                     }
                                     if(imc>=24.9){
                                         sobrepeso.setVisibility(View.VISIBLE);
+                                        desc_s.setVisibility(View.VISIBLE);
                                     }
 
                                 }

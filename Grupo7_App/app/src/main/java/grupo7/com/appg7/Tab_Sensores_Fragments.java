@@ -109,6 +109,8 @@ import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
             setIMC();
             SetOthers();
+
+
             return v;
 
         }

@@ -43,12 +43,8 @@ public class MainActivity extends Activity implements MqttCallback {
     private boolean resmagnetico;
 
     FirebaseFirestore db= FirebaseFirestore.getInstance();
-    //FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-    //DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-
 
     private MqttClient Mqttclient;
-    //private String enviarGas = "grupo7/practica/enviarGas/";
 
     public String fecha;
     public String gas;
@@ -59,9 +55,10 @@ public class MainActivity extends Activity implements MqttCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //FirebaseApp.initializeApp(getBaseContext());
-
-
         Log.i(TAG, "Starting Android Things app...");
+
+
+        //-----------MQTT----------
         //conectarse al broker   iot.eclipse.org
         try {
             Log.i(TAG, "Conectando al broker " + broker);
@@ -94,8 +91,18 @@ public class MainActivity extends Activity implements MqttCallback {
             Log.e(TAG, "Error al publicar.", e);
         }*/
 
-//----------------------------
-        //--UART--
+        //-----------Nearby--------
+        NearbyAdvManager advManager = new NearbyAdvManager(this, new NearbyAdvManager.EventListener() {
+            @Override
+            public void onMessage(String message) {
+
+                usuarioActual = message;
+
+            }
+
+        });
+
+        //----------UART----------
         /*
         PeripheralManager perifericos = PeripheralManager.getInstance();
         Log.d("HomeActivity", "GPIO: " + perifericos.getGpioList());

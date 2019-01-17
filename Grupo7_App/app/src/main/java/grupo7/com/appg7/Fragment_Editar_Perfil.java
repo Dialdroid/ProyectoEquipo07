@@ -15,10 +15,16 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +34,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 public class Fragment_Editar_Perfil extends Fragment {
 
     private static final int PICK_IMAGE = 100;
+
     //Uri imageUri;
 
     @Override
@@ -40,10 +47,11 @@ public class Fragment_Editar_Perfil extends Fragment {
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         final DocumentReference userinfo = db.collection("usuarios").document(usuario.getUid());
+        final CollectionReference putAlt = db.collection("usuarios").document(usuario.getUid()).collection("Altura");
 
 
 
-        View vista = inflater.inflate(R.layout.fragment_fragment__editar__perfil, container, false);
+        final View vista = inflater.inflate(R.layout.fragment_fragment__editar__perfil, container, false);
 
         //data.put("nombre", miusuario.getNombre());
 
@@ -94,15 +102,15 @@ public class Fragment_Editar_Perfil extends Fragment {
                 // entra en el onclick
 
                 toast1.show();
+                DateFormat df = new SimpleDateFormat("dd/MMM/yyyy");
+                String date = df.format(Calendar.getInstance().getTime());
                 Map<String,Object> data = new HashMap<>();
-
+                Map<String,Object> setalt = new HashMap<>();
                 if (!nuevoNombre.equals("")) {
 
                     data.put("nombre", nuevoNombre);
 
                 }
-
-
 
                 if (!nuevoCorreo.equals("")) {
 
@@ -112,15 +120,14 @@ public class Fragment_Editar_Perfil extends Fragment {
 
                 if (!nuevoAltura.equals("")) {
 
-                    data.put("altura", nuevoAltura);
+                    setalt.put("Altura", nuevoAltura);
+                    setalt.put("Fecha",date);
+
 
                 }
 
 
-
-
-
-
+                putAlt.add(setalt);
                 userinfo.update(data);
             }
 

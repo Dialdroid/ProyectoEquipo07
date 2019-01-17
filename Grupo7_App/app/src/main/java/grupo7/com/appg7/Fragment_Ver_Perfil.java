@@ -137,7 +137,7 @@ public class Fragment_Ver_Perfil extends Fragment implements View.OnClickListene
 
         final CollectionReference medidasInfo = db.collection("usuarios").document(user.getUid()).collection("Altura");
 
-        medidasInfo.orderBy("Altura", Query.Direction.DESCENDING).limit(1)
+        medidasInfo.orderBy("Fecha", Query.Direction.DESCENDING).limit(1)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -147,10 +147,9 @@ public class Fragment_Ver_Perfil extends Fragment implements View.OnClickListene
 
                             Log.d(TAG, documentSnapshot.getId() + " => " + documentSnapshot.getData());
 
-                            Double mimedida = documentSnapshot.getDouble("Altura");
-                            String altura = Double.toString(mimedida);
-                            Log.d("alt", altura);
-                            alturaUser.setText(altura);
+                            String mimedida = documentSnapshot.getString("Altura");
+                            Log.d("alt", mimedida);
+                            alturaUser.setText(mimedida);
 
                         }
 

@@ -171,12 +171,12 @@ public class MainActivity extends Activity implements MqttCallback {
                 Map<String, String> datos = new HashMap<>();
                 datos.put("fecha",fecha );
                 datos.put("gas", gas);
-                db.collection("usuarios").document("E7lFmxiGkJWuPKr1GkvEuhdAAZg2").collection("Gas").add(datos);
+                db.collection("usuarios").document(usuarioActual).collection("Gas").add(datos);
 
                 Map<String, String> datos1 = new HashMap<>();
                 datos.put("fecha",fecha );
                 datos.put("movimiento", movimiento);
-                db.collection("usuarios").document("E7lFmxiGkJWuPKr1GkvEuhdAAZg2").collection("Gas").add(datos1);
+                db.collection("usuarios").document(usuarioActual).collection("Gas").add(datos1);
 
             }
         });

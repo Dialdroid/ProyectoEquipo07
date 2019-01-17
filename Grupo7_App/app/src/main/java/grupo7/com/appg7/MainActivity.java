@@ -1,17 +1,23 @@
 package grupo7.com.appg7;
 
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -44,6 +50,24 @@ public class MainActivity extends AppCompatActivity
         private Button AcercaDe;
 
         private static final String TAG = "MainActivity";
+
+    private static final String TAGG = "NearbyApp";
+    private NearbyDsvManager dsvManager;
+    private boolean conectado = false;
+
+
+    private static final String[] REQUIRED_PERMISSIONS =
+            new String[] {
+                    Manifest.permission.BLUETOOTH,
+                    Manifest.permission.BLUETOOTH_ADMIN,
+                    Manifest.permission.ACCESS_WIFI_STATE,
+                    Manifest.permission.CHANGE_WIFI_STATE,
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+            };
+
+    private static int REQUEST_CODE_REQUIRED_PERMISSIONS = 1;
+
+    private static boolean permisosApp;
 
 
 
@@ -127,15 +151,9 @@ public class MainActivity extends AppCompatActivity
                 drawer.closeDrawer(GravityCompat.START);
             }
         });
+
+        sincronizarDispositivos(null);
     }
-
-
-
-
-
-
-
-
 
     @Override
     public void onBackPressed() {
@@ -486,5 +504,56 @@ public class MainActivity extends AppCompatActivity
         Intent i = new Intent(this, EditarPerfil.class);
         startActivity(i);
     }*/
+
+    public void sincronizarDispositivos(View view) {
+
+        if(permisosApp == true){
+
+            if( conectado != true ) {
+
+                dsvManager = new NearbyDsvManager(this,listener);
+
+            } else {
+
+
+
+            }
+
+        }
+
+
+    }
+
+    @Override
+    protected void onStart() {
+
+        super.onStart();
+
+    }
+
+    private NearbyDsvManager.EventListener listener = new NearbyDsvManager.EventListener() {
+
+        @Override
+        public void startDiscovering() {
+
+
+        }
+
+        @Override
+        public void onDiscovered() {
+
+        }
+
+        @Override
+        public void onConnected() {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
+            dsvManager.sendData(uid);
+        }
+
+
+    };
+
+
 
 }
